@@ -12,9 +12,12 @@ In **Workers & Pages** → your project → **Settings** → **Build**:
 |---------|--------|
 | **Framework preset** | `None` |
 | **Build command** | `npm run build` |
+| **Deploy command** | **(leave EMPTY — delete `npx wrangler deploy` if it is there)** |
 | **Build output directory** | `dist` |
 | **Root directory** | `/` (leave empty / default) |
-| **Node.js version** | `20` (or “Default” if 20 is available) |
+| **Node.js version** | `20` |
+
+**Important:** Do **not** use `npx wrangler deploy`. That is for Workers, not static Pages. Cloudflare publishes `dist/` automatically when deploy command is empty.
 
 Click **Save** → **Retry deployment**.
 
@@ -53,6 +56,7 @@ Live URL: **https://oyshibanglabistro.pages.dev**
 | `dist` not found | Set **Build output directory** to `dist` (not `/` or blank) |
 | Wrong framework (Next, Jekyll, etc.) | Set **Framework preset** to **None** |
 | Build succeeds but 404 | Output must be `dist`, not project root |
+| `wrangler deploy` / Missing entry-point | **Clear Deploy command** (must be empty) |
 
 ---
 
