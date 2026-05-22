@@ -79,7 +79,6 @@ www.oyshibanglabistro.ca
 cd ~/oyshis-bangla-bistro
 git add CNAME
 git commit -m "Add custom domain"
-git push pages main
 git push origin main
 ```
 

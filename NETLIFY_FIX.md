@@ -12,7 +12,7 @@ Netlify only **publishes** that folder — it does **not** run a build. That avo
 | Build command | *(leave completely empty)* |
 | Publish directory | `dist` |
 | Branch | `main` |
-| Repository | `SAI141003/SAI141003.github.io` |
+| Repository | **`SAI141003/SAI141003.github.io`** (the only repo — do not use oyshis-bangla-bistro) |
 
 Save → **Trigger deploy** → **Deploy site**.
 
@@ -33,7 +33,7 @@ npm run build
 ```bash
 git add .
 git commit -m "Update menu"
-git push pages main
+git push origin main
 ```
 
 4. Netlify updates automatically (1–2 min).

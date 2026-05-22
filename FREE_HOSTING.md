@@ -16,7 +16,7 @@ cd ~/oyshis-bangla-bistro
 git add .
 git commit -m "Your change"
 git push origin main
-git push pages main
+git push origin main
 ```
 
 3. Netlify rebuilds automatically (1–2 minutes)

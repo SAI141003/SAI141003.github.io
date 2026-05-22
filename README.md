@@ -3,6 +3,9 @@
 A clean, multi-page static website for **Oyshi Bangla Bistro** (Vancouver, BC).
 Pure HTML / CSS / vanilla JavaScript — no build step required.
 
+**One GitHub repo only:** [github.com/SAI141003/SAI141003.github.io](https://github.com/SAI141003/SAI141003.github.io)  
+*(The old `oyshis-bangla-bistro` repo was removed to avoid confusion.)*
+
 ## Pages
 
 - `index.html` — Home (hero, story, signature dishes, CTA)
@@ -104,13 +107,13 @@ Hosted on **Netlify** (auto-deploy from GitHub). After you edit files locally:
 
 ```bash
 cd ~/oyshis-bangla-bistro
+npm run build
 git add .
 git commit -m "Describe your change"
 git push origin main
-git push pages main
 ```
 
-Netlify rebuilds in about 1–2 minutes. See **[FREE_HOSTING.md](FREE_HOSTING.md)** if you need to reconnect Netlify.
+Netlify rebuilds in about 1–2 minutes. Connect Netlify to **`SAI141003.github.io`** only — see **[NETLIFY_FIX.md](NETLIFY_FIX.md)**.
 
 ## Reviews
 
