@@ -1,4 +1,4 @@
-/* Load images from Supabase or data/gallery.json and render across the site */
+/* Load images from Firebase or data/gallery.json and render across the site */
 (function () {
   'use strict';
 
@@ -18,7 +18,7 @@
         cache = await window.OyshiBackend.fetchGallery();
         if (cache.images && cache.images.length > 0) return cache;
       } catch (err) {
-        console.warn('Supabase gallery, using JSON fallback:', err);
+        console.warn('Firebase gallery, using JSON fallback:', err);
       }
     }
 

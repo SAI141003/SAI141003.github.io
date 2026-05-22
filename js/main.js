@@ -1,4 +1,4 @@
-/* Oyshi's Bangla Bistro — shared interactions */
+/* Oyshi Bangla Bistro — shared interactions */
 (function () {
   'use strict';
 

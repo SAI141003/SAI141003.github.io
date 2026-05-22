@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manage Photos — Oyshi's Bangla Bistro</title>
+  <title>Manage Photos — Oyshi Bangla Bistro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
     <div class="container nav">
       <a href="index.html" class="brand">
         <span class="brand-mark">O</span>
-        <span>Oyshi's Bangla Bistro</span>
+        <span>Oyshi Bangla Bistro</span>
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
       <ul class="nav-links">
@@ -57,7 +57,7 @@
 
       <div id="setupHelp" class="admin-card reveal" style="margin-bottom:2rem">
         <h3>Backend not connected yet</h3>
-        <p>Follow <a href="BACKEND_SETUP.md">BACKEND_SETUP.md</a> to create a free Supabase project, then paste your keys into <code>js/config.js</code> and push to GitHub.</p>
+        <p>Follow <a href="FIREBASE_SETUP.md">FIREBASE_SETUP.md</a> to create a free Firebase project, then paste your config into <code>js/config.js</code> and push to GitHub.</p>
         <p style="font-size:0.9rem;color:var(--cocoa-soft)">Until then, use the JSON method in README (download gallery.json).</p>
       </div>
 
@@ -130,11 +130,14 @@
 
   <footer class="site-footer">
     <div class="container footer-bottom">
-      &copy; <span id="year"></span> Oyshi's Bangla Bistro · <a href="index.html">Back to website</a>
+      &copy; <span id="year"></span> Oyshi Bangla Bistro · <a href="index.html">Back to website</a>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
   <script src="js/config.js"></script>
   <script src="js/backend.js"></script>
   <script src="js/main.js"></script>
@@ -198,7 +201,7 @@
             };
           });
         } catch (e) {
-          list.innerHTML = '<li>Could not load. Run schema.sql in Supabase first.</li>';
+          list.innerHTML = '<li>Could not load gallery. Check Firebase rules and login.</li>';
         }
       }
 
@@ -232,8 +235,7 @@
           box.querySelectorAll('[data-no]').forEach((b) => {
             b.onclick = async () => {
               if (!confirm('Delete this review?')) return;
-              const sb = window.OyshiBackend.getClient();
-              await sb.from('reviews').delete().eq('id', b.dataset.no);
+              await window.OyshiBackend.deleteReview(b.dataset.no);
               await loadPendingReviews();
             };
           });

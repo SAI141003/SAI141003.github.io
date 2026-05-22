@@ -1,5 +1,11 @@
-/* Paste Supabase keys here (see BACKEND_SETUP.md). Leave empty to use JSON files only. */
+/* Paste Firebase config (see FIREBASE_SETUP.md). Leave empty to use JSON files only. */
 window.SITE_CONFIG = {
-  supabaseUrl: '',
-  supabaseAnonKey: '',
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: '',
+  },
 };

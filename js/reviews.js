@@ -1,4 +1,4 @@
-/* Reviews: Supabase or JSON + FormSubmit fallback */
+/* Reviews: Firebase or JSON + FormSubmit fallback */
 (function () {
   'use strict';
 
@@ -53,7 +53,7 @@
         renderReviews(reviews);
         return;
       } catch (err) {
-        console.warn('Supabase reviews:', err);
+        console.warn('Firebase reviews:', err);
       }
     }
 

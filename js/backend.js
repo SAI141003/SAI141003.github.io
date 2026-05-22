@@ -1,170 +1,177 @@
-/* Supabase backend — gallery + reviews + owner uploads */
+/* Firebase backend — gallery + reviews + owner uploads */
 (function () {
   'use strict';
 
-  let client = null;
+  let ready = null;
 
   function cfg() {
     return window.SITE_CONFIG || {};
   }
 
   function isEnabled() {
-    const c = cfg();
-    return Boolean(c.supabaseUrl && c.supabaseAnonKey && window.supabase);
+    const f = cfg().firebase || {};
+    return Boolean(f.apiKey && f.projectId && window.firebase);
   }
 
-  function getClient() {
+  function initFirebase() {
     if (!isEnabled()) return null;
-    if (!client) {
-      client = window.supabase.createClient(cfg().supabaseUrl, cfg().supabaseAnonKey);
+    if (!ready) {
+      ready = Promise.resolve().then(() => {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(cfg().firebase);
+        }
+      });
     }
-    return client;
+    return ready;
   }
 
-  function rowToImage(row) {
+  function db() {
+    return firebase.firestore();
+  }
+
+  function storage() {
+    return firebase.storage();
+  }
+
+  function auth() {
+    return firebase.auth();
+  }
+
+  function docToImage(id, data) {
     return {
-      id: row.id,
-      src: row.src,
-      alt: row.alt || row.title || '',
-      title: row.title || '',
-      desc: row.description || '',
-      price: row.price || '',
-      menuBoard: row.menu_board,
+      id,
+      src: data.src,
+      alt: data.alt || data.title || '',
+      title: data.title || '',
+      desc: data.description || '',
+      price: data.price || '',
+      menuBoard: Boolean(data.menuBoard),
+      sortOrder: data.sortOrder || 0,
     };
   }
 
   async function fetchGallery() {
-    const sb = getClient();
-    if (!sb) throw new Error('Backend not configured');
-
-    const { data, error } = await sb
-      .from('gallery_images')
-      .select('*')
-      .order('sort_order', { ascending: true })
-      .order('created_at', { ascending: true });
-
-    if (error) throw error;
-    return { images: (data || []).map(rowToImage) };
+    await initFirebase();
+    const snap = await db().collection('gallery_images').get();
+    const images = snap.docs
+      .map((d) => docToImage(d.id, d.data()))
+      .sort((a, b) => a.sortOrder - b.sortOrder);
+    return { images };
   }
 
   async function fetchReviews() {
-    const sb = getClient();
-    if (!sb) throw new Error('Backend not configured');
+    await initFirebase();
+    const snap = await db()
+      .collection('reviews')
+      .where('approved', '==', true)
+      .get();
 
-    const { data, error } = await sb
-      .from('reviews')
-      .select('*')
-      .eq('approved', true)
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return (data || []).map((r) => ({
-      name: r.name,
-      rating: r.rating,
-      text: r.message,
-      date: new Date(r.created_at).toLocaleDateString('en-CA', {
-        month: 'short',
-        year: 'numeric',
-      }),
-    }));
+    return snap.docs
+      .map((d) => {
+        const r = d.data();
+        const created = r.createdAt?.toDate?.() || new Date(0);
+        return {
+          name: r.name,
+          rating: r.rating,
+          text: r.message,
+          date: created.toLocaleDateString('en-CA', { month: 'short', year: 'numeric' }),
+          _t: created.getTime(),
+        };
+      })
+      .sort((a, b) => b._t - a._t)
+      .map(({ _t, ...rest }) => rest);
   }
 
   async function submitReview({ name, rating, message, email }) {
-    const sb = getClient();
-    if (!sb) throw new Error('Backend not configured');
-
-    const { error } = await sb.from('reviews').insert({
+    await initFirebase();
+    await db().collection('reviews').add({
       name,
       rating: Number(rating),
       message,
       email: email || '',
       approved: false,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    if (error) throw error;
   }
 
   async function signIn(email, password) {
-    const sb = getClient();
-    const { data, error } = await sb.auth.signInWithPassword({ email, password });
-    if (error) throw error;
-    return data;
+    await initFirebase();
+    return auth().signInWithEmailAndPassword(email, password);
   }
 
   async function signOut() {
-    const sb = getClient();
-    if (sb) await sb.auth.signOut();
+    await initFirebase();
+    return auth().signOut();
   }
 
   async function getSession() {
-    const sb = getClient();
-    if (!sb) return null;
-    const { data } = await sb.auth.getSession();
-    return data.session;
+    await initFirebase();
+    const user = auth().currentUser;
+    if (user) return { user: { email: user.email } };
+    return new Promise((resolve) => {
+      const unsub = auth().onAuthStateChanged((u) => {
+        unsub();
+        resolve(u ? { user: { email: u.email } } : null);
+      });
+    });
   }
 
   async function uploadGalleryImage(file, meta) {
-    const sb = getClient();
-    const session = await getSession();
-    if (!session) throw new Error('Please log in first.');
+    await initFirebase();
+    if (!auth().currentUser) throw new Error('Please log in first.');
 
     const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
-    const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const path = `gallery/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const ref = storage().ref(path);
 
-    const { error: upErr } = await sb.storage.from('gallery').upload(path, file, {
-      cacheControl: '3600',
-      upsert: false,
-    });
-    if (upErr) throw upErr;
+    await ref.put(file);
+    const publicUrl = await ref.getDownloadURL();
 
-    const { data: urlData } = sb.storage.from('gallery').getPublicUrl(path);
-    const publicUrl = urlData.publicUrl;
-
-    const { error: dbErr } = await sb.from('gallery_images').insert({
+    await db().collection('gallery_images').add({
       src: publicUrl,
       alt: meta.alt || meta.title || '',
       title: meta.title || '',
       description: meta.description || '',
       price: meta.price || '',
-      menu_board: Boolean(meta.menuBoard),
-      sort_order: meta.sortOrder || 0,
+      menuBoard: Boolean(meta.menuBoard),
+      sortOrder: meta.sortOrder || Date.now(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    if (dbErr) throw dbErr;
 
     return publicUrl;
   }
 
   async function deleteGalleryImage(id) {
-    const sb = getClient();
-    const session = await getSession();
-    if (!session) throw new Error('Please log in first.');
-
-    const { error } = await sb.from('gallery_images').delete().eq('id', id);
-    if (error) throw error;
+    await initFirebase();
+    if (!auth().currentUser) throw new Error('Please log in first.');
+    await db().collection('gallery_images').doc(id).delete();
   }
 
   async function fetchAllReviews() {
-    const sb = getClient();
-    const session = await getSession();
-    if (!session) throw new Error('Please log in first.');
-
-    const { data, error } = await sb
-      .from('reviews')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
+    await initFirebase();
+    if (!auth().currentUser) throw new Error('Please log in first.');
+    const snap = await db().collection('reviews').get();
+    return snap.docs
+      .map((d) => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => {
+        const ta = a.createdAt?.toDate?.()?.getTime() || 0;
+        const tb = b.createdAt?.toDate?.()?.getTime() || 0;
+        return tb - ta;
+      });
   }
 
   async function setReviewApproved(id, approved) {
-    const sb = getClient();
-    const { error } = await sb.from('reviews').update({ approved }).eq('id', id);
-    if (error) throw error;
+    await initFirebase();
+    await db().collection('reviews').doc(id).update({ approved });
+  }
+
+  async function deleteReview(id) {
+    await initFirebase();
+    await db().collection('reviews').doc(id).delete();
   }
 
   window.OyshiBackend = {
     isEnabled,
-    getClient,
     fetchGallery,
     fetchReviews,
     submitReview,
@@ -175,5 +182,6 @@
     deleteGalleryImage,
     fetchAllReviews,
     setReviewApproved,
+    deleteReview,
   };
 })();

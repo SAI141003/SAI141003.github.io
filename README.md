@@ -1,6 +1,6 @@
-# Oyshi's Bangla Bistro — Website
+# Oyshi Bangla Bistro — Website
 
-A clean, multi-page static website for **Oyshi's Bangla Bistro** (Vancouver, BC).
+A clean, multi-page static website for **Oyshi Bangla Bistro** (Vancouver, BC).
 Pure HTML / CSS / vanilla JavaScript — no build step required.
 
 ## Pages
@@ -55,9 +55,9 @@ python3 -m http.server 8080
 
 ## Backend (recommended)
 
-Hook up free **Supabase** so you can upload photos and approve reviews without editing GitHub.
+Hook up free **Firebase** so you can upload photos and approve reviews without editing GitHub.
 
-**Setup guide:** [BACKEND_SETUP.md](BACKEND_SETUP.md)
+**Setup guide:** [FIREBASE_SETUP.md](FIREBASE_SETUP.md)
 
 Paste keys in `js/config.js`. Until then, the site uses JSON files (below).
 
@@ -86,7 +86,9 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 
 ## Live site
 
-**https://sai141003.github.io/oyshis-bangla-bistro/**
+**https://sai141003.github.io/**
+
+*(Older link `…/oyshis-bangla-bistro/` still works until you turn off Pages on that repo.)*
 
 Hosted on GitHub Pages from the `main` branch. After you edit files locally, deploy with:
 
