@@ -72,8 +72,8 @@
     updateButtons();
   }
 
-  // ---------- Gallery lightbox ----------
-  const gallery = document.querySelector('.gallery');
+  // ---------- Lightbox (gallery + menu boards) ----------
+  const gallery = document.querySelector('.gallery, .menu-boards--zoom');
   if (gallery) {
     const box = document.createElement('div');
     box.className = 'lightbox';
