@@ -28,6 +28,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="menu.html">Menu</a></li>
         <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
         <li><a href="contact.html">Order &amp; Contact</a></li>
       </ul>
     </div>
@@ -245,6 +246,80 @@
     </div>
   </section>
 
+  <!-- ========== Reviews ========== -->
+  <section class="section section--alt" id="reviews">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="eyebrow">Reviews</span>
+        <h2>What customers say</h2>
+        <p>Read reviews below or leave your own.</p>
+      </div>
+
+      <div class="reviews-layout reveal">
+        <div class="reviews-list" id="reviewsList" aria-live="polite">
+          <p class="reviews-empty">Loading reviews…</p>
+        </div>
+
+        <div class="review-form-wrap">
+          <div class="review-thanks" id="reviewThanks" hidden>
+            <h3>Thank you</h3>
+            <p>We got your review. We may add it to this page after we read it.</p>
+          </div>
+
+          <div class="review-form-card" id="reviewFormCard">
+            <h3>Leave a review</h3>
+            <p class="form-note">Your review is sent to us by email. We post selected reviews here.</p>
+
+            <form
+              id="reviewForm"
+              action="https://formsubmit.co/oyshictg2000@gmail.com"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="New review – Oyshi's Bangla Bistro">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://sai141003.github.io/oyshis-bangla-bistro/index.html?review=thanks#reviews">
+
+              <div class="review-honeypot" aria-hidden="true">
+                <label>Leave blank</label>
+                <input type="text" name="_honey" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="review-field">
+                <label for="reviewName">Your name</label>
+                <input type="text" id="reviewName" name="name" required maxlength="80" autocomplete="name">
+              </div>
+
+              <div class="review-field">
+                <label>Rating</label>
+                <div class="star-rating" role="group" aria-label="Star rating">
+                  <button type="button" data-value="1" aria-label="1 star">&#9734;</button>
+                  <button type="button" data-value="2" aria-label="2 stars">&#9734;</button>
+                  <button type="button" data-value="3" aria-label="3 stars">&#9734;</button>
+                  <button type="button" data-value="4" aria-label="4 stars">&#9734;</button>
+                  <button type="button" data-value="5" aria-label="5 stars">&#9734;</button>
+                </div>
+                <input type="hidden" name="rating" id="reviewRating" value="" required>
+              </div>
+
+              <div class="review-field">
+                <label for="reviewText">Your review</label>
+                <textarea id="reviewText" name="message" required maxlength="1000" placeholder="What did you order? How was the food?"></textarea>
+              </div>
+
+              <div class="review-field">
+                <label for="reviewEmail">Email <span style="font-weight:400;color:var(--cocoa-soft)">(optional)</span></label>
+                <input type="email" id="reviewEmail" name="email" maxlength="120" autocomplete="email" placeholder="Only if you want us to reply">
+              </div>
+
+              <button type="submit" class="btn btn--primary">Submit review</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== CTA strip ========== -->
   <section class="section">
     <div class="container">
@@ -292,6 +367,7 @@
           <ul>
             <li><a href="menu.html">Menu</a></li>
             <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
             <li><a href="contact.html">Order &amp; Contact</a></li>
           </ul>
         </div>
@@ -303,5 +379,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/reviews.js"></script>
 </body>
 </html>

@@ -76,6 +76,25 @@ git push
 
 The site updates in about 1–2 minutes after each push.
 
+## Reviews
+
+- Customers submit reviews on the home page (**Reviews** section). Submissions go to **oyshictg2000@gmail.com** (via [FormSubmit](https://formsubmit.co)).
+- The first time a review is sent, FormSubmit may email you a link to **activate** the form. Click it once.
+- To **show a review on the website**, add an entry to `data/reviews.json`:
+
+```json
+[
+  {
+    "name": "Ayesha",
+    "rating": 5,
+    "text": "The beef teheri was excellent. Will order again.",
+    "date": "May 2026"
+  }
+]
+```
+
+Then commit and push. The `date` field is optional.
+
 ## Custom domain (optional)
 
 In the repo on GitHub: **Settings → Pages → Custom domain**, then point your domain’s DNS to GitHub Pages (A/CNAME records per GitHub’s instructions).
