@@ -44,7 +44,7 @@
           Pickup, delivery, outdoor seating, or catering for your next event.
         </p>
         <div class="hero__cta">
-          <a class="btn btn--primary" href="menu.html">View the Menu</a>
+          <a class="btn btn--primary" href="#menu">View the Menu</a>
           <a class="btn btn--ghost" href="contact.html">Order Now</a>
         </div>
       </div>
@@ -105,45 +105,143 @@
     </div>
   </section>
 
-  <!-- ========== Featured dishes ========== -->
-  <section class="section">
+  <!-- ========== Menu scroll ========== -->
+  <section class="section" id="menu">
     <div class="container">
-      <div class="section-title reveal">
-        <span class="eyebrow">Popular</span>
-        <h2>Often Ordered</h2>
-        <p>A few dishes customers order regularly.</p>
+      <div class="menu-scroll-header reveal">
+        <div class="section-title">
+          <span class="eyebrow">Menu</span>
+          <h2>What we cook</h2>
+          <p>Scroll sideways to browse. Full list on the menu page.</p>
+        </div>
+        <div class="menu-scroll-nav" aria-hidden="false">
+          <button type="button" class="menu-scroll-prev" aria-label="Scroll menu left">&#8249;</button>
+          <button type="button" class="menu-scroll-next" aria-label="Scroll menu right">&#8250;</button>
+        </div>
       </div>
+    </div>
 
-      <div class="cards">
-        <article class="card reveal">
-          <img src="images/gallery/05-beef-orosh.png" alt="Beef Orosh biryani with olives">
+    <div class="menu-scroll-outer reveal">
+      <div class="menu-scroll" id="menuScroll">
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/01-beef-teheri.png" alt="Beef teheri">
+          <div class="card__body">
+            <h3>Beef Teheri</h3>
+            <p>Beef and potato teheri.</p>
+            <span class="price">$12</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/05-beef-orosh.png" alt="Beef orosh biryani">
           <div class="card__body">
             <h3>Beef Orosh Biryani</h3>
-            <p>Beef biryani with olives. $12</p>
+            <p>Beef biryani with olives.</p>
+            <span class="price">$12</span>
           </div>
         </article>
-        <article class="card reveal">
-          <img src="images/gallery/04-chicken-kosha.png" alt="Chicken kosha with crispy onions">
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/04-chicken-kosha.png" alt="Chicken kosha">
           <div class="card__body">
             <h3>Chicken Kosha</h3>
-            <p>Chicken drumsticks in onion masala. $18</p>
+            <p>Drumsticks in onion masala.</p>
+            <span class="price">$18</span>
           </div>
         </article>
-        <article class="card reveal">
-          <img src="images/gallery/03-dim-bhuna.png" alt="Egg curry with whole boiled eggs">
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/08-chicken-korma.png" alt="Chicken korma">
+          <div class="card__body">
+            <h3>Chicken Korma</h3>
+            <p>5 drumsticks.</p>
+            <span class="price">$20</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/03-dim-bhuna.png" alt="Dim bhuna">
           <div class="card__body">
             <h3>Dim Bhuna</h3>
-            <p>Egg curry with tomato and onion. $15</p>
+            <p>Egg curry, 4pc.</p>
+            <span class="price">$15</span>
           </div>
         </article>
-        <article class="card reveal">
-          <img src="images/gallery/02-mixed-vaji-dal.png" alt="Mixed vaji and dal">
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/02-mixed-vaji-dal.png" alt="Mixed vaji and daal">
           <div class="card__body">
             <h3>Mixed Vaji &amp; Daal</h3>
-            <p>Mixed vegetable bhaji with chonar daal. $12</p>
+            <p>2 shareable.</p>
+            <span class="price">$12</span>
           </div>
         </article>
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/06-rupchada-masallam.png" alt="Rupchada masallam">
+          <div class="card__body">
+            <h3>Rupchada Masallam</h3>
+            <p>4pc.</p>
+            <span class="price">$10</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card">
+          <img src="images/gallery/07-vorta-platter.png" alt="Vorta platter">
+          <div class="card__body">
+            <h3>Vorta Platter</h3>
+            <p>Mixed vorta.</p>
+            <span class="price">$15</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card menu-scroll__card--no-img">
+          <div class="card__body">
+            <h3>Beef Kalabhuna</h3>
+            <p>15pc.</p>
+            <span class="price">$24</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card menu-scroll__card--no-img">
+          <div class="card__body">
+            <h3>Beef Rezala</h3>
+            <p>15pc.</p>
+            <span class="price">$24</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card menu-scroll__card--no-img">
+          <div class="card__body">
+            <h3>Koi Mach Bhuna</h3>
+            <p>5pc. New.</p>
+            <span class="price">$24</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card menu-scroll__card--no-img">
+          <div class="card__body">
+            <h3>Bangla Mama Fuchka</h3>
+            <p>Nasta.</p>
+            <span class="price">$14</span>
+          </div>
+        </article>
+
+        <article class="menu-scroll__card menu-scroll__card--no-img">
+          <div class="card__body">
+            <h3>Nasta Platter</h3>
+            <p>For sharing.</p>
+            <span class="price">$40</span>
+          </div>
+        </article>
+
       </div>
+    </div>
+
+    <div class="container menu-scroll-footer reveal">
+      <p class="menu-scroll-hint">Swipe or use arrows to scroll</p>
+      <a class="btn btn--primary" href="menu.html">Full Menu</a>
     </div>
   </section>
 

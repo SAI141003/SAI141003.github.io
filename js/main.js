@@ -44,6 +44,34 @@
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
+  // ---------- Home page menu horizontal scroll ----------
+  const menuScroll = document.getElementById('menuScroll');
+  const prevBtn = document.querySelector('.menu-scroll-prev');
+  const nextBtn = document.querySelector('.menu-scroll-next');
+
+  if (menuScroll && prevBtn && nextBtn) {
+    const step = () => {
+      const card = menuScroll.querySelector('.menu-scroll__card');
+      return card ? card.offsetWidth + 20 : 300;
+    };
+
+    const updateButtons = () => {
+      const max = menuScroll.scrollWidth - menuScroll.clientWidth - 2;
+      prevBtn.disabled = menuScroll.scrollLeft <= 2;
+      nextBtn.disabled = menuScroll.scrollLeft >= max;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      menuScroll.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+      menuScroll.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+    menuScroll.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+  }
+
   // ---------- Gallery lightbox ----------
   const gallery = document.querySelector('.gallery');
   if (gallery) {
