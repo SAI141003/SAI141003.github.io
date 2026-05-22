@@ -14,6 +14,7 @@ const htmlFiles = [
   'gallery.html',
   'contact.html',
   'manage-images.html',
+  'firebase-help.html',
 ];
 
 const copyDirs = ['css', 'js', 'data', 'images'];

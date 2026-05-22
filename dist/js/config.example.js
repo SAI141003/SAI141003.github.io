@@ -1,15 +1,15 @@
 /**
- * Copy to config.js and paste your Firebase web app config.
- * Firebase Console → Project settings → Your apps → Web app
+ * Copy to config.js and paste apiKey + appId from Firebase Console.
+ * Project settings → Your apps → Web app → firebaseConfig
  */
 window.SITE_CONFIG = {
   siteUrl: 'https://oyshibanglabistro.netlify.app',
   firebase: {
-    apiKey: 'AIza...',
-    authDomain: 'your-project.firebaseapp.com',
-    projectId: 'your-project-id',
-    storageBucket: 'your-project-id.appspot.com',
-    messagingSenderId: '123456789',
-    appId: '1:123456789:web:abc123',
+    apiKey: 'PASTE_FROM_FIREBASE_CONSOLE',
+    authDomain: 'oyshi-bangla-bistro.firebaseapp.com',
+    projectId: 'oyshi-bangla-bistro',
+    storageBucket: 'oyshi-bangla-bistro.firebasestorage.app',
+    messagingSenderId: '533772481391',
+    appId: 'PASTE_FROM_FIREBASE_CONSOLE',
   },
 };

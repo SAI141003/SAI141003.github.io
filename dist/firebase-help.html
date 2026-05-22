@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Firebase keys — Oyshi Bangla Bistro</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .help { max-width: 640px; margin: 0 auto; }
+    .help ol { line-height: 1.8; padding-left: 1.25rem; }
+    .help li { margin-bottom: 0.75rem; }
+    .help .btn-row { margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .help code { background: var(--cream-soft); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    .help-box { background: #fff; border: 2px solid var(--peach); border-radius: 12px; padding: 1.25rem; margin: 1.5rem 0; }
+    .help-box h3 { margin-top: 0; color: var(--terracotta-d); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">O</span>
+        <span>Oyshi Bangla Bistro</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container help">
+      <h1 style="font-family:'Playfair Display',serif">Find your Firebase keys</h1>
+      <p>Project: <strong>oyshi-bangla-bistro</strong></p>
+
+      <div class="help-box" style="border-color:#c62828;background:#fff8f6">
+        <h3>Do NOT use these (wrong place)</h3>
+        <ul style="margin:0;padding-left:1.2rem;line-height:1.7">
+          <li><strong>Service account</strong> (firebase-adminsdk@...) — server only, not for website</li>
+          <li><strong>Web Push certificates</strong> — notifications only</li>
+          <li><strong>Project ID / Project number</strong> — you have these, but not enough alone</li>
+        </ul>
+        <p style="margin:0.75rem 0 0"><strong>You need:</strong> Web app → <code>apiKey</code> and <code>appId</code></p>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://console.firebase.google.com/project/oyshi-bangla-bistro/settings/general" target="_blank" rel="noopener">Open Firebase settings (click here)</a>
+      </div>
+
+      <div class="help-box">
+        <h3>First time? Add a Web app</h3>
+        <p>If you do <strong>not</strong> see “SDK setup” or “firebaseConfig”:</p>
+        <ol>
+          <li>On Firebase home, find the title <strong>oyshi-bangla-bistro</strong></li>
+          <li>Under it, click the <strong>Web</strong> icon <code>&lt;/&gt;</code> (not Android or Apple)</li>
+          <li>Nickname: <code>Oyshi Website</code> → <strong>Register app</strong></li>
+          <li>On “Add Firebase SDK” screen — <strong>copy the config</strong> shown (or click Continue)</li>
+        </ol>
+      </div>
+
+      <h2>Where the keys are</h2>
+      <ol>
+        <li>Click the <strong>gear icon</strong> next to “Project Overview” (top left)</li>
+        <li>Click <strong>Project settings</strong></li>
+        <li>Stay on the <strong>General</strong> tab</li>
+        <li>Scroll down to <strong>Your apps</strong></li>
+        <li>Click your web app <code>&lt;/&gt; Oyshi Website</code> (or add one first — see above)</li>
+        <li>Under <strong>SDK setup and configuration</strong>, choose <strong>Config</strong></li>
+        <li>Copy the block that starts with <code>apiKey:</code></li>
+      </ol>
+
+      <div class="help-box">
+        <h3>What to copy (send in chat or put in js/config.js)</h3>
+        <pre style="background:var(--cream-soft);padding:1rem;border-radius:8px;overflow:auto;font-size:0.85rem">apiKey: "......"
+authDomain: "oyshi-bangla-bistro.firebaseapp.com"
+projectId: "oyshi-bangla-bistro"
+storageBucket: "......"
+messagingSenderId: "533772481391"
+appId: "1:533772481391:web:......"</pre>
+      </div>
+
+      <p><a href="manage-images.html">← Back to Upload Photos</a></p>
+    </div>
+  </section>
+</body>
+</html>
