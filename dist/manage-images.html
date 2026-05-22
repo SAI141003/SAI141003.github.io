@@ -3,27 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manage Photos — Oyshi Bangla Bistro</title>
+  <title>Upload Photos — Oyshi Bangla Bistro</title>
   <link rel="canonical" href="https://oyshibanglabistro.netlify.app/manage-images.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .admin-wrap { max-width: 520px; margin: 0 auto; }
     .admin-card { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: var(--shadow-sm); }
     .admin-card h3 { margin-top: 0; font-family: 'Playfair Display', serif; }
-    .status-pill { display: inline-block; padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
+    .status-pill { display: inline-block; padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
     .status-pill--on { background: #e8f5e9; color: #2e7d32; }
     .status-pill--off { background: #fff3e0; color: #e65100; }
-    .owner-list { list-style: none; padding: 0; margin: 1rem 0 0; max-height: 320px; overflow-y: auto; }
-    .owner-list li { display: flex; gap: 0.75rem; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid rgba(74,42,26,.08); }
-    .owner-list img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
-    .owner-list .meta { flex: 1; font-size: 0.9rem; }
-    .owner-list button { font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: 6px; border: 1px solid #c62828; background: #fff; color: #c62828; cursor: pointer; }
-    .pending-review { background: var(--cream-soft); padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.9rem; }
-    .pending-review button { margin-right: 0.35rem; margin-top: 0.35rem; }
-    @media (max-width: 800px) { .admin-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -49,89 +41,72 @@
   <section class="page-intro">
     <div class="container">
       <span class="eyebrow">Site owner</span>
-      <h1>Manage photos &amp; reviews</h1>
-      <p id="backendStatus">Checking backend…</p>
+      <h1>Upload photos</h1>
+      <p id="backendStatus">Checking connection…</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
+    <div class="container admin-wrap">
 
-      <div id="setupHelp" class="admin-card reveal" style="margin-bottom:2rem">
-        <h3>Photos on the site (JSON mode)</h3>
-        <p style="font-size:0.9rem;color:var(--cocoa-soft);margin-top:0">
-          Firebase upload is optional. To add photos now: put images in <code>images/gallery/</code>,
-          run <code>npm run build</code>, commit, and push to GitHub.
-        </p>
-        <ul class="owner-list" id="jsonGalleryList" style="margin-top:1rem"></ul>
-        <p style="font-size:0.9rem;margin-top:1rem">
-          For one-click upload from this page, set up Firebase
-          (<a href="https://github.com/SAI141003/SAI141003.github.io/blob/main/FIREBASE_SETUP.md" target="_blank" rel="noopener">setup guide</a>)
-          and paste keys in <code>js/config.js</code>.
+      <div id="notConnected" class="admin-card" hidden>
+        <h3>Firebase not connected</h3>
+        <p style="color:var(--cocoa-soft);font-size:0.95rem">
+          Add your Firebase keys to <code>js/config.js</code> and push to GitHub.
+          See the <a href="https://github.com/SAI141003/SAI141003.github.io/blob/main/FIREBASE_SETUP.md" target="_blank" rel="noopener">setup guide</a>.
         </p>
       </div>
 
       <div id="ownerPanel" hidden>
-        <div class="admin-grid">
-          <div class="admin-card">
-            <h3>Owner login</h3>
-            <div id="loginForm">
-              <div class="review-field">
-                <label for="ownerEmail">Email</label>
-                <input type="email" id="ownerEmail" autocomplete="username">
-              </div>
-              <div class="review-field">
-                <label for="ownerPass">Password</label>
-                <input type="password" id="ownerPass" autocomplete="current-password">
-              </div>
-              <button type="button" class="btn btn--primary" id="btnLogin">Log in</button>
+        <div class="admin-card" style="margin-bottom:1.25rem">
+          <div id="loginForm">
+            <h3>Log in</h3>
+            <div class="review-field">
+              <label for="ownerEmail">Email</label>
+              <input type="email" id="ownerEmail" autocomplete="username">
             </div>
-            <div id="loggedInAs" hidden>
-              <p>Logged in as <strong id="ownerEmailShow"></strong></p>
-              <button type="button" class="btn btn--ghost" id="btnLogout">Log out</button>
+            <div class="review-field">
+              <label for="ownerPass">Password</label>
+              <input type="password" id="ownerPass" autocomplete="current-password">
             </div>
+            <button type="button" class="btn btn--primary" id="btnLogin">Log in</button>
           </div>
-
-          <div class="admin-card" id="uploadCard" hidden>
-            <h3>Upload new photo</h3>
-            <div class="review-field">
-              <label for="upFile">Image file</label>
-              <input type="file" id="upFile" accept="image/*" required>
-            </div>
-            <div class="review-field">
-              <label for="upTitle">Title</label>
-              <input type="text" id="upTitle" placeholder="Beef Teheri">
-            </div>
-            <div class="review-field">
-              <label for="upAlt">Short label</label>
-              <input type="text" id="upAlt" placeholder="Beef teheri">
-            </div>
-            <div class="review-field">
-              <label for="upDesc">Description</label>
-              <input type="text" id="upDesc" placeholder="Beef and potato teheri.">
-            </div>
-            <div class="review-field">
-              <label for="upPrice">Price</label>
-              <input type="text" id="upPrice" placeholder="$12">
-            </div>
-            <div class="review-field">
-              <label><input type="checkbox" id="upBoard"> Menu board (flyer only)</label>
-            </div>
-            <button type="button" class="btn btn--primary" id="btnUpload">Upload</button>
-            <p id="uploadMsg" style="font-size:0.9rem;margin-top:0.75rem"></p>
+          <div id="loggedInAs" hidden>
+            <p style="margin:0 0 1rem">Logged in as <strong id="ownerEmailShow"></strong></p>
+            <button type="button" class="btn btn--ghost" id="btnLogout">Log out</button>
           </div>
         </div>
 
-        <div class="admin-card reveal" style="margin-top:2rem" id="galleryListCard" hidden>
-          <h3>Photos on website</h3>
-          <p style="font-size:0.9rem;color:var(--cocoa-soft)">These show on home scroll, slideshow, gallery, and menu.</p>
-          <ul class="owner-list" id="ownerGalleryList"></ul>
-        </div>
-
-        <div class="admin-card reveal" style="margin-top:2rem" id="reviewsCard" hidden>
-          <h3>Pending reviews</h3>
-          <p style="font-size:0.9rem;color:var(--cocoa-soft)">Approve to show on the home page.</p>
-          <div id="pendingReviews"></div>
+        <div class="admin-card" id="uploadCard" hidden>
+          <h3>Upload photo</h3>
+          <p style="font-size:0.9rem;color:var(--cocoa-soft);margin-top:0">
+            Photos go live on the home page, menu, and gallery right away.
+          </p>
+          <div class="review-field">
+            <label for="upFile">Image</label>
+            <input type="file" id="upFile" accept="image/*">
+          </div>
+          <div class="review-field">
+            <label for="upTitle">Title</label>
+            <input type="text" id="upTitle" placeholder="Beef Teheri">
+          </div>
+          <div class="review-field">
+            <label for="upAlt">Short label</label>
+            <input type="text" id="upAlt" placeholder="Beef teheri">
+          </div>
+          <div class="review-field">
+            <label for="upDesc">Description</label>
+            <input type="text" id="upDesc" placeholder="Beef and potato teheri.">
+          </div>
+          <div class="review-field">
+            <label for="upPrice">Price</label>
+            <input type="text" id="upPrice" placeholder="$12">
+          </div>
+          <div class="review-field">
+            <label><input type="checkbox" id="upBoard"> Menu board only (flyer, not home scroll)</label>
+          </div>
+          <button type="button" class="btn btn--primary" id="btnUpload">Upload</button>
+          <p id="uploadMsg" style="font-size:0.9rem;margin-top:0.75rem;color:var(--terracotta-d)"></p>
         </div>
       </div>
 
@@ -154,24 +129,23 @@
   <script>
     (function () {
       const statusEl = document.getElementById('backendStatus');
-      const setupHelp = document.getElementById('setupHelp');
+      const notConnected = document.getElementById('notConnected');
       const ownerPanel = document.getElementById('ownerPanel');
       const loginForm = document.getElementById('loginForm');
       const loggedInAs = document.getElementById('loggedInAs');
       const uploadCard = document.getElementById('uploadCard');
-      const galleryListCard = document.getElementById('galleryListCard');
-      const reviewsCard = document.getElementById('reviewsCard');
 
-      function setStatus(on) {
-        if (on) {
-          statusEl.innerHTML = '<span class="status-pill status-pill--on">Backend connected</span> Upload photos and approve reviews here.';
-          setupHelp.hidden = true;
-          ownerPanel.hidden = false;
-        } else {
-          statusEl.innerHTML = '<span class="status-pill status-pill--off">Backend off — using JSON files</span>';
-          setupHelp.hidden = false;
-          ownerPanel.hidden = true;
-        }
+      const connected = window.OyshiBackend?.isEnabled();
+
+      if (connected) {
+        statusEl.innerHTML = '<span class="status-pill status-pill--on">Connected to Firebase</span>';
+        notConnected.hidden = true;
+        ownerPanel.hidden = false;
+        refreshUI();
+      } else {
+        statusEl.innerHTML = '<span class="status-pill status-pill--off">Not connected</span>';
+        notConnected.hidden = false;
+        ownerPanel.hidden = true;
       }
 
       async function refreshUI() {
@@ -180,77 +154,8 @@
         loginForm.hidden = loggedIn;
         loggedInAs.hidden = !loggedIn;
         uploadCard.hidden = !loggedIn;
-        galleryListCard.hidden = !loggedIn;
-        reviewsCard.hidden = !loggedIn;
         if (loggedIn) {
           document.getElementById('ownerEmailShow').textContent = session.user.email;
-          await loadGalleryList();
-          await loadPendingReviews();
-        }
-      }
-
-      async function loadGalleryList() {
-        const list = document.getElementById('ownerGalleryList');
-        try {
-          const data = await window.OyshiBackend.fetchGallery();
-          list.innerHTML = (data.images || [])
-            .map(
-              (img) => `
-            <li>
-              <img src="${img.src}" alt="">
-              <div class="meta"><strong>${img.title || img.alt}</strong><br>${img.price || ''} ${img.menuBoard ? '· board' : ''}</div>
-              <button type="button" data-del="${img.id}">Delete</button>
-            </li>`
-            )
-            .join('');
-          list.querySelectorAll('[data-del]').forEach((btn) => {
-            btn.onclick = async () => {
-              if (!confirm('Delete this photo from the website?')) return;
-              await window.OyshiBackend.deleteGalleryImage(btn.dataset.del);
-              await loadGalleryList();
-            };
-          });
-        } catch (e) {
-          list.innerHTML = '<li>Could not load gallery. Check Firebase rules and login.</li>';
-        }
-      }
-
-      async function loadPendingReviews() {
-        const box = document.getElementById('pendingReviews');
-        try {
-          const rows = await window.OyshiBackend.fetchAllReviews();
-          const pending = rows.filter((r) => !r.approved);
-          if (!pending.length) {
-            box.innerHTML = '<p style="color:var(--cocoa-soft)">No pending reviews.</p>';
-            return;
-          }
-          box.innerHTML = pending
-            .map(
-              (r) => `
-            <div class="pending-review">
-              <strong>${r.name}</strong> · ${r.rating}/5<br>
-              ${r.message}
-              <br>
-              <button type="button" class="btn btn--primary btn-sm" data-ok="${r.id}">Approve</button>
-              <button type="button" class="btn btn--ghost btn-sm" data-no="${r.id}">Delete</button>
-            </div>`
-            )
-            .join('');
-          box.querySelectorAll('[data-ok]').forEach((b) => {
-            b.onclick = async () => {
-              await window.OyshiBackend.setReviewApproved(b.dataset.ok, true);
-              await loadPendingReviews();
-            };
-          });
-          box.querySelectorAll('[data-no]').forEach((b) => {
-            b.onclick = async () => {
-              if (!confirm('Delete this review?')) return;
-              await window.OyshiBackend.deleteReview(b.dataset.no);
-              await loadPendingReviews();
-            };
-          });
-        } catch (e) {
-          box.innerHTML = '<p>Log in to manage reviews.</p>';
         }
       }
 
@@ -262,7 +167,7 @@
           );
           await refreshUI();
         } catch (e) {
-          alert(e.message || 'Login failed');
+          alert(e.message || 'Login failed. Check email/password in Firebase Authentication.');
         }
       };
 
@@ -284,47 +189,18 @@
             price: document.getElementById('upPrice').value.trim(),
             menuBoard: document.getElementById('upBoard').checked,
           });
-          msg.textContent = 'Uploaded. It is live on the site now.';
+          msg.textContent = 'Uploaded. Refresh the home page to see it.';
           document.getElementById('upFile').value = '';
-          await loadGalleryList();
+          document.getElementById('upTitle').value = '';
+          document.getElementById('upAlt').value = '';
+          document.getElementById('upDesc').value = '';
+          document.getElementById('upPrice').value = '';
+          document.getElementById('upBoard').checked = false;
         } catch (e) {
           msg.textContent = '';
-          alert(e.message || 'Upload failed');
+          alert(e.message || 'Upload failed. Check you are logged in and Firebase Storage rules are published.');
         }
       };
-
-      async function loadJsonGallery() {
-        const list = document.getElementById('jsonGalleryList');
-        if (!list) return;
-        try {
-          const res = await fetch('data/gallery.json');
-          const data = await res.json();
-          const imgs = data.images || [];
-          if (!imgs.length) {
-            list.innerHTML = '<li>No photos in gallery.json yet.</li>';
-            return;
-          }
-          list.innerHTML = imgs
-            .map(
-              (img) => `
-            <li>
-              <img src="${img.src}" alt="">
-              <div class="meta"><strong>${img.title || img.alt || 'Photo'}</strong><br>${img.price || ''} ${img.menuBoard ? '· menu board' : ''}</div>
-            </li>`
-            )
-            .join('');
-        } catch (e) {
-          list.innerHTML = '<li>Could not load gallery.json</li>';
-        }
-      }
-
-      setStatus(window.OyshiBackend?.isEnabled());
-      if (window.OyshiBackend?.isEnabled()) {
-        setupHelp.hidden = true;
-        refreshUI();
-      } else {
-        loadJsonGallery();
-      }
     })();
   </script>
 </body>
