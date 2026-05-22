@@ -498,16 +498,18 @@ img { max-width: 100%; display: block; }
   transition: transform .25s ease, box-shadow .25s ease;
   cursor: zoom-in;
 }
-.gallery.is-loading {
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.gallery.is-loading:empty {
+  min-height: 160px;
+  position: relative;
+}
+.gallery.is-loading:empty::after {
+  content: 'Loading photos…';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   color: var(--cocoa-soft);
   font-size: 0.95rem;
-}
-.gallery.is-loading::before {
-  content: 'Loading photos…';
 }
 .gallery img:hover {
   transform: scale(1.02);
