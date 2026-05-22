@@ -103,25 +103,6 @@ git push origin main
 
 Push to GitHub → Vercel rebuilds in ~2 min.
 
-## Reviews
-
-- Customers submit reviews on the home page (**Reviews** section). Submissions go to **oyshictg2000@gmail.com** (via [FormSubmit](https://formsubmit.co)).
-- The first time a review is sent, FormSubmit may email you a link to **activate** the form. Click it once.
-- To **show a review on the website**, add an entry to `data/reviews.json`:
-
-```json
-[
-  {
-    "name": "Ayesha",
-    "rating": 5,
-    "text": "The beef teheri was excellent. Will order again.",
-    "date": "May 2026"
-  }
-]
-```
-
-Then commit and push. The `date` field is optional.
-
 ## Custom domain (remove “github” from the link)
 
 Free GitHub hosting **cannot** give you a link with zero “github” in it. To use only your business name (e.g. **https://oyshibanglabistro.ca**), buy a domain and follow **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.

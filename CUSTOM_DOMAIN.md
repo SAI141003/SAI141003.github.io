@@ -89,8 +89,6 @@ git push origin main
 - Open `https://www.yourdomain.ca` — site should load
 - Open `https://sai141003.github.io` — may still work; you can leave it or later disable old Pages on other repos
 
-The review form on the home page already uses your **current** domain for redirects (no hard-coded github link).
-
 ---
 
 ## Facebook / Google / cards
