@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Copy public site files into dist/ (works on Netlify, GitHub Actions, Windows, Mac).
+ * Copy public site files into dist/ (Firebase Hosting, GitHub Pages, local preview).
  */
 const fs = require('fs');
 const path = require('path');
@@ -38,8 +38,6 @@ for (const d of copyDirs) {
 }
 
 fs.writeFileSync(path.join(dist, '.nojekyll'), '');
-const redirects = path.join(root, '_redirects');
-if (fs.existsSync(redirects)) cp(redirects, path.join(dist, '_redirects'));
 
 const count = (dir) => {
   let n = 0;

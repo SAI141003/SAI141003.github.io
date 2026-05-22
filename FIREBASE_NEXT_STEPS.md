@@ -17,7 +17,7 @@ You still need **apiKey** and **appId** from a **Web app** (not shown on the pro
 
 ```javascript
 window.SITE_CONFIG = {
-  siteUrl: 'https://sai141003.github.io',
+  siteUrl: 'https://oyshi-bangla-bistro.web.app',
   firebase: {
     apiKey: 'PASTE_HERE',
     authDomain: 'PASTE_HERE',
@@ -57,16 +57,21 @@ window.SITE_CONFIG = {
 
 ---
 
-## Step 5 — Authorized domain (GitHub Pages)
+## Step 5 — Deploy website on Firebase Hosting
 
-**Authentication** → **Settings** → **Authorized domains** → **Add domain:**
+```bash
+cd ~/oyshis-bangla-bistro
+npm install -g firebase-tools
+firebase login
+npm run deploy:firebase
+```
 
-`sai141003.github.io`
+Live URL: **https://oyshi-bangla-bistro.web.app** — see **[FIREBASE_HOSTING.md](FIREBASE_HOSTING.md)**.
 
 ---
 
 ## Done?
 
-Open **Add Photos** at https://sai141003.github.io/manage-images.html You should see **Connected to Firebase** → log in → upload a test photo.
+Open **Add Photos** at https://oyshi-bangla-bistro.web.app/manage-images.html You should see **Connected to Firebase** → log in → upload a test photo.
 
 **Need help?** Paste your Step 1 config here (apiKey, projectId, etc.) and say “config pasted” — the rest can be wired up for you.

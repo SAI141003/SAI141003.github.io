@@ -2,6 +2,11 @@
   "name": "oyshi-bangla-bistro",
   "private": true,
   "scripts": {
-    "build": "node scripts/build-dist.js"
+    "build": "node scripts/build-dist.js",
+    "deploy:firebase": "npm run build && firebase deploy --only hosting",
+    "deploy:firebase:all": "npm run build && firebase deploy"
+  },
+  "devDependencies": {
+    "firebase-tools": "^14.0.0"
   }
 }

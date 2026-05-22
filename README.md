@@ -89,21 +89,21 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 
 ## Live site (share this link)
 
-**https://sai141003.github.io/**
+**https://oyshi-bangla-bistro.web.app** (Firebase Hosting — deploy with `npm run deploy:firebase`)
 
 | Page | Link |
 |------|------|
-| Home | https://sai141003.github.io/ |
-| Menu | https://sai141003.github.io/menu.html |
-| Gallery | https://sai141003.github.io/gallery.html |
-| Order & Contact | https://sai141003.github.io/contact.html |
-| Add Photos (owner) | https://sai141003.github.io/manage-images.html |
+| Home | https://oyshi-bangla-bistro.web.app/ |
+| Menu | https://oyshi-bangla-bistro.web.app/menu.html |
+| Gallery | https://oyshi-bangla-bistro.web.app/gallery.html |
+| Order & Contact | https://oyshi-bangla-bistro.web.app/contact.html |
+| Add Photos (owner) | https://oyshi-bangla-bistro.web.app/manage-images.html |
 
-Netlify (`oyshibanglabistro.netlify.app`) is **paused** (free plan limit). See **[HOSTING.md](HOSTING.md)**.
+**Deploy:** see **[FIREBASE_HOSTING.md](FIREBASE_HOSTING.md)**. Backup: https://sai141003.github.io/ — see **[HOSTING.md](HOSTING.md)**.
 
 ---
 
-Hosted on **GitHub Pages** (auto-deploy from GitHub). After you edit files locally:
+After you edit files locally:
 
 ```bash
 cd ~/oyshis-bangla-bistro
@@ -113,7 +113,7 @@ git commit -m "Describe your change"
 git push origin main
 ```
 
-GitHub Actions rebuilds in about 1–2 minutes.
+Push to GitHub updates the backup site (~1–2 min). For Firebase, run `npm run deploy:firebase`.
 
 ## Reviews
 
@@ -138,7 +138,7 @@ Then commit and push. The `date` field is optional.
 
 Free GitHub hosting **cannot** give you a link with zero “github” in it. To use only your business name (e.g. **https://oyshibanglabistro.ca**), buy a domain and follow **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
 
-You can point a custom domain to Netlify later — see **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
+You can point a custom domain to **Firebase Hosting** or **GitHub Pages** — see **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)** and **[FIREBASE_HOSTING.md](FIREBASE_HOSTING.md)**.
 
 ## Contact
 

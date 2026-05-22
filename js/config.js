@@ -1,6 +1,6 @@
 /* Firebase web config — oyshibanglabistro */
 window.SITE_CONFIG = {
-  siteUrl: 'https://sai141003.github.io',
+  siteUrl: 'https://oyshi-bangla-bistro.web.app',
   firebase: {
     apiKey: 'AIzaSyD6BI3q_Iq_IfBnmBL1nrds4SM87ECo6fU',
     authDomain: 'oyshi-bangla-bistro.firebaseapp.com',

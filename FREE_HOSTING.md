@@ -1,27 +1,29 @@
-# Live site — GitHub Pages (free)
+# Live site — Firebase Hosting (free)
 
-**https://sai141003.github.io/**
+**https://oyshi-bangla-bistro.web.app**
 
 | Page | URL |
 |------|-----|
-| Home | https://sai141003.github.io/ |
-| Menu | https://sai141003.github.io/menu.html |
-| Gallery | https://sai141003.github.io/gallery.html |
-| Contact | https://sai141003.github.io/contact.html |
-| Add Photos | https://sai141003.github.io/manage-images.html |
+| Home | https://oyshi-bangla-bistro.web.app/ |
+| Menu | https://oyshi-bangla-bistro.web.app/menu.html |
+| Gallery | https://oyshi-bangla-bistro.web.app/gallery.html |
+| Contact | https://oyshi-bangla-bistro.web.app/contact.html |
+| Add Photos | https://oyshi-bangla-bistro.web.app/manage-images.html |
 
-## Update the site
+## Deploy updates
 
 ```bash
 cd ~/oyshis-bangla-bistro
-npm run build
-git add -A
-git commit -m "Your change"
-git push origin main
+firebase login          # once
+npm run deploy:firebase
 ```
 
-GitHub deploys automatically (~1–2 min).
+See **[FIREBASE_HOSTING.md](FIREBASE_HOSTING.md)** for full setup.
 
-## Netlify (paused)
+## Backup
 
-`https://oyshibanglabistro.netlify.app` hit Netlify’s free usage limit and is paused. Use GitHub Pages above, or upgrade Netlify to unpause. See **[HOSTING.md](HOSTING.md)**.
+https://sai141003.github.io/ — updates automatically on `git push`.
+
+## Netlify
+
+Removed. Use Firebase Hosting or GitHub Pages.
