@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Copy public site files into dist/ (Firebase Hosting, GitHub Pages, local preview).
+ * Copy public site files into dist/ (Cloudflare Pages, GitHub Pages).
  */
 const fs = require('fs');
 const path = require('path');
@@ -8,14 +8,7 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 const dist = path.join(root, 'dist');
 
-const htmlFiles = [
-  'index.html',
-  'menu.html',
-  'gallery.html',
-  'contact.html',
-  'manage-images.html',
-  'firebase-help.html',
-];
+const htmlFiles = ['index.html', 'menu.html', 'gallery.html', 'contact.html'];
 
 const copyDirs = ['css', 'js', 'data', 'images'];
 
@@ -38,6 +31,9 @@ for (const d of copyDirs) {
 }
 
 fs.writeFileSync(path.join(dist, '.nojekyll'), '');
+
+const cname = path.join(root, 'CNAME');
+if (fs.existsSync(cname)) cp(cname, path.join(dist, 'CNAME'));
 
 const count = (dir) => {
   let n = 0;

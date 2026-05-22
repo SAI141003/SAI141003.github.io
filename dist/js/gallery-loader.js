@@ -1,4 +1,4 @@
-/* Load images from Firebase or data/gallery.json and render across the site */
+/* Load images from data/gallery.json and render across the site */
 (function () {
   'use strict';
 
@@ -12,16 +12,6 @@
 
   async function loadGallery() {
     if (cache) return cache;
-
-    if (window.OyshiBackend?.isEnabled()) {
-      try {
-        cache = await window.OyshiBackend.fetchGallery();
-        if (cache.images && cache.images.length > 0) return cache;
-      } catch (err) {
-        console.warn('Firebase gallery, using JSON fallback:', err);
-      }
-    }
-
     const res = await fetch('data/gallery.json');
     if (!res.ok) throw new Error('Could not load gallery.json');
     cache = await res.json();

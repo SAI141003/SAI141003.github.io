@@ -1,35 +1,30 @@
-# Where your site is hosted
+# Your website link (no GitHub in the URL)
 
-## Live site (use this link)
+## Share this link
 
-**https://sai141003.github.io/**
+**https://oyshibanglabistro.pages.dev**
+
+Set up once: **[CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md)** (free Cloudflare Pages).
 
 | Page | Link |
 |------|------|
-| Home | https://sai141003.github.io/ |
-| Menu | https://sai141003.github.io/menu.html |
-| Gallery | https://sai141003.github.io/gallery.html |
-| Contact | https://sai141003.github.io/contact.html |
-
-Updates automatically when you `git push` to `main` (free, no Netlify/Firebase hosting needed).
+| Home | https://oyshibanglabistro.pages.dev/ |
+| Menu | https://oyshibanglabistro.pages.dev/menu.html |
+| Gallery | https://oyshibanglabistro.pages.dev/gallery.html |
+| Contact | https://oyshibanglabistro.pages.dev/contact.html |
 
 ---
 
-## Other free hosts
+## Why not `sai141003.github.io`?
 
-See **[FREE_HOSTING.md](FREE_HOSTING.md)** for Cloudflare Pages, Vercel, and others.
+GitHub’s free address always includes **github** in the URL. Cloudflare Pages gives you **oyshibanglabistro.pages.dev** for free.
 
-**Recommended upgrade path:** stay on GitHub Pages, or add **Cloudflare Pages** if you need more bandwidth.
-
----
-
-## Update photos / content
-
-Edit `data/gallery.json` and files in `images/gallery/`, then push to GitHub. No upload page — see README.
+For **oyshibanglabistro.ca** (no `.pages.dev` either), buy a domain — see **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
 
 ---
 
-## Removed
+## Update content
 
-- **Netlify** — deleted (hit free limit)
-- **Firebase upload / Add Photos** — removed (free tier not suitable)
+Edit files → `git push` → Cloudflare redeploys in ~2 minutes.
+
+Photos: edit `data/gallery.json` and add images under `images/gallery/`.

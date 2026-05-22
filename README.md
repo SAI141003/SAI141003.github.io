@@ -56,22 +56,11 @@ python3 -m http.server 8080
 # then visit http://localhost:8080
 ```
 
-## Backend (recommended)
+## Add new photos
 
-Hook up free **Firebase** so you can upload photos and approve reviews without editing GitHub.
-
-**Setup guide:** [FIREBASE_SETUP.md](FIREBASE_SETUP.md)
-
-Paste keys in `js/config.js`. Until then, the site uses JSON files (below).
-
----
-
-## Add new photos (owner, without backend)
-
-1. Open **Add Photos** in the menu → [manage-images.html](manage-images.html)
-2. Or: drop image files in `images/gallery/`, then run `node scripts/sync-gallery.js`
-3. Edit `data/gallery.json` if you need custom titles/prices
-4. Push to GitHub — the site updates everywhere automatically:
+1. Drop image files in `images/gallery/`, then run `node scripts/sync-gallery.js` (optional)
+2. Edit `data/gallery.json` if you need custom titles/prices
+3. Push to GitHub — Cloudflare Pages updates automatically:
    - Home page **About** slideshow (rotating)
    - Home page **menu scroll** (sideways)
    - **Gallery** page
@@ -83,23 +72,22 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 
 - **Prices / menu items** — edit `menu.html` (one `<article class="menu-card">` per dish).
 - **Featured dishes on Home** — edit the `Customer Favourites` block inside `index.html`.
-- **Gallery photos** — use `manage-images.html` or edit `data/gallery.json` (see above).
+- **Gallery photos** — edit `data/gallery.json` (see above).
 - **Contact details** — phone, email, address and Facebook link live inside `contact.html` (and the footer of every page).
 - **Theme colours** — change CSS variables at the top of `css/styles.css` (`--terracotta`, `--cream`, etc.).
 
-## Live site (share this link)
+## Live site (share this link — no “github” in the URL)
 
-**https://oyshi-bangla-bistro.web.app** (Firebase Hosting — deploy with `npm run deploy:firebase`)
+**https://oyshibanglabistro.pages.dev**
 
 | Page | Link |
 |------|------|
-| Home | https://oyshi-bangla-bistro.web.app/ |
-| Menu | https://oyshi-bangla-bistro.web.app/menu.html |
-| Gallery | https://oyshi-bangla-bistro.web.app/gallery.html |
-| Order & Contact | https://oyshi-bangla-bistro.web.app/contact.html |
-| Add Photos (owner) | https://oyshi-bangla-bistro.web.app/manage-images.html |
+| Home | https://oyshibanglabistro.pages.dev/ |
+| Menu | https://oyshibanglabistro.pages.dev/menu.html |
+| Gallery | https://oyshibanglabistro.pages.dev/gallery.html |
+| Order & Contact | https://oyshibanglabistro.pages.dev/contact.html |
 
-**Deploy:** see **[FIREBASE_HOSTING.md](FIREBASE_HOSTING.md)**. Backup: https://sai141003.github.io/ — see **[HOSTING.md](HOSTING.md)**.
+**First-time setup:** [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) (connect GitHub to Cloudflare Pages, ~10 min).
 
 ---
 
@@ -113,7 +101,7 @@ git commit -m "Describe your change"
 git push origin main
 ```
 
-Push to GitHub updates the backup site (~1–2 min). For Firebase, run `npm run deploy:firebase`.
+Push to GitHub → Cloudflare rebuilds in ~2 min.
 
 ## Reviews
 
@@ -138,7 +126,7 @@ Then commit and push. The `date` field is optional.
 
 Free GitHub hosting **cannot** give you a link with zero “github” in it. To use only your business name (e.g. **https://oyshibanglabistro.ca**), buy a domain and follow **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
 
-You can point a custom domain to **Firebase Hosting** or **GitHub Pages** — see **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)** and **[FIREBASE_HOSTING.md](FIREBASE_HOSTING.md)**.
+For **oyshibanglabistro.ca** (your own domain, ~$15/year), see **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
 
 ## Contact
 
