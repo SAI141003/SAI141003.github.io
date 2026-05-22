@@ -57,9 +57,17 @@
     <div class="container">
 
       <div id="setupHelp" class="admin-card reveal" style="margin-bottom:2rem">
-        <h3>Backend not connected yet</h3>
-        <p>Follow <a href="FIREBASE_SETUP.md">FIREBASE_SETUP.md</a> to create a free Firebase project, then paste your config into <code>js/config.js</code> and push to GitHub.</p>
-        <p style="font-size:0.9rem;color:var(--cocoa-soft)">Until then, use the JSON method in README (download gallery.json).</p>
+        <h3>Photos on the site (JSON mode)</h3>
+        <p style="font-size:0.9rem;color:var(--cocoa-soft);margin-top:0">
+          Firebase upload is optional. To add photos now: put images in <code>images/gallery/</code>,
+          run <code>npm run build</code>, commit, and push to GitHub.
+        </p>
+        <ul class="owner-list" id="jsonGalleryList" style="margin-top:1rem"></ul>
+        <p style="font-size:0.9rem;margin-top:1rem">
+          For one-click upload from this page, set up Firebase
+          (<a href="https://github.com/SAI141003/SAI141003.github.io/blob/main/FIREBASE_SETUP.md" target="_blank" rel="noopener">setup guide</a>)
+          and paste keys in <code>js/config.js</code>.
+        </p>
       </div>
 
       <div id="ownerPanel" hidden>
@@ -284,8 +292,38 @@
         }
       };
 
+      async function loadJsonGallery() {
+        const list = document.getElementById('jsonGalleryList');
+        if (!list) return;
+        try {
+          const res = await fetch('data/gallery.json');
+          const data = await res.json();
+          const imgs = data.images || [];
+          if (!imgs.length) {
+            list.innerHTML = '<li>No photos in gallery.json yet.</li>';
+            return;
+          }
+          list.innerHTML = imgs
+            .map(
+              (img) => `
+            <li>
+              <img src="${img.src}" alt="">
+              <div class="meta"><strong>${img.title || img.alt || 'Photo'}</strong><br>${img.price || ''} ${img.menuBoard ? '· menu board' : ''}</div>
+            </li>`
+            )
+            .join('');
+        } catch (e) {
+          list.innerHTML = '<li>Could not load gallery.json</li>';
+        }
+      }
+
       setStatus(window.OyshiBackend?.isEnabled());
-      if (window.OyshiBackend?.isEnabled()) refreshUI();
+      if (window.OyshiBackend?.isEnabled()) {
+        setupHelp.hidden = true;
+        refreshUI();
+      } else {
+        loadJsonGallery();
+      }
     })();
   </script>
 </body>

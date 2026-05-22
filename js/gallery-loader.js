@@ -100,10 +100,16 @@
 
   function initGalleryGrid(container, images) {
     if (!container) return;
+    container.classList.remove('is-loading');
+    if (!images.length) {
+      container.innerHTML =
+        '<p style="color:var(--cocoa-soft);grid-column:1/-1">No photos yet. Check back soon.</p>';
+      return;
+    }
     container.innerHTML = images
       .map(
         (item) =>
-          `<img src="${esc(item.src)}" alt="${esc(item.alt || item.title || '')}" loading="lazy">`
+          `<img src="${esc(item.src)}" alt="${esc(item.alt || item.title || '')}" loading="lazy" width="400" height="300">`
       )
       .join('');
   }
@@ -141,6 +147,9 @@
   }
 
   async function init() {
+    const galleryEl = document.querySelector('.gallery--dynamic');
+    if (galleryEl) galleryEl.classList.add('is-loading');
+
     try {
       const data = await loadGallery();
       const food = foodImages(data);
@@ -149,11 +158,16 @@
 
       initSlideshow(document.getElementById('aboutSlideshow'), food);
       initMenuScroll(document.getElementById('menuScroll'), food);
-      initGalleryGrid(document.querySelector('.gallery--dynamic'), all);
+      initGalleryGrid(galleryEl, all);
       initMenuBoards(document.querySelector('.menu-boards--dynamic'), boards);
       initMenuPhotoGrid(document.getElementById('menuPhotoGrid'), food);
     } catch (err) {
       console.warn('Gallery loader:', err);
+      if (galleryEl) {
+        galleryEl.classList.remove('is-loading');
+        galleryEl.innerHTML =
+          '<p style="color:var(--cocoa-soft)">Could not load photos. Please refresh the page.</p>';
+      }
     }
   }
 
