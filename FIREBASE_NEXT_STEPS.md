@@ -6,11 +6,14 @@ Do these **4 steps** in [Firebase Console](https://console.firebase.google.com),
 
 ## Step 1 — Web app config (send this to complete connection)
 
-1. Open your project **oyshi-bangla-bistro** (or whatever you named it)
+Your project is **oyshi-bangla-bistro** (project number 533772481391).  
+You still need **apiKey** and **appId** from a **Web app** (not shown on the project overview page).
+
+1. Open project **oyshi-bangla-bistro**
 2. Click the **gear** → **Project settings**
 3. Scroll to **Your apps**
-4. If there is no web app yet: click **`</>`** (Web) → name: `Oyshi Website` → **Register app**
-5. Copy the `firebaseConfig` values and paste them in chat, OR into `js/config.js`:
+4. If there is no web app yet: click **`</>`** (Web) → name: `Oyshi Website` → **Register app** → Continue (no need for Firebase Hosting)
+5. You will see `const firebaseConfig = { ... }` — copy **apiKey** and **appId** (and check storageBucket) and paste in chat, OR into `js/config.js`:
 
 ```javascript
 window.SITE_CONFIG = {
