@@ -1,40 +1,35 @@
 # Where your site is hosted
 
-## Primary — Firebase Hosting (recommended)
-
-**https://oyshi-bangla-bistro.web.app**
-
-Deploy from your Mac:
-
-```bash
-cd ~/oyshis-bangla-bistro
-npm install -g firebase-tools   # once
-firebase login                # once
-npm run deploy:firebase
-```
-
-Full steps: **[FIREBASE_HOSTING.md](FIREBASE_HOSTING.md)**
-
-| Page | Link |
-|------|------|
-| Home | https://oyshi-bangla-bistro.web.app/ |
-| Menu | https://oyshi-bangla-bistro.web.app/menu.html |
-| Gallery | https://oyshi-bangla-bistro.web.app/gallery.html |
-| Contact | https://oyshi-bangla-bistro.web.app/contact.html |
-| Add Photos | https://oyshi-bangla-bistro.web.app/manage-images.html |
-
-Same Firebase project as Auth, Firestore, and Storage — no extra backend setup.
-
----
-
-## Backup — GitHub Pages
+## Live site (use this link)
 
 **https://sai141003.github.io/**
 
-Auto-deploys on `git push` (free). Use if Firebase deploy is not run yet.
+| Page | Link |
+|------|------|
+| Home | https://sai141003.github.io/ |
+| Menu | https://sai141003.github.io/menu.html |
+| Gallery | https://sai141003.github.io/gallery.html |
+| Contact | https://sai141003.github.io/contact.html |
+
+Updates automatically when you `git push` to `main` (free, no Netlify/Firebase hosting needed).
 
 ---
 
-## Netlify — removed
+## Other free hosts
 
-The Netlify project was deleted. Use **Firebase Hosting** or **GitHub Pages** only.
+See **[FREE_HOSTING.md](FREE_HOSTING.md)** for Cloudflare Pages, Vercel, and others.
+
+**Recommended upgrade path:** stay on GitHub Pages, or add **Cloudflare Pages** if you need more bandwidth.
+
+---
+
+## Update photos / content
+
+Edit `data/gallery.json` and files in `images/gallery/`, then push to GitHub. No upload page — see README.
+
+---
+
+## Removed
+
+- **Netlify** — deleted (hit free limit)
+- **Firebase upload / Add Photos** — removed (free tier not suitable)
