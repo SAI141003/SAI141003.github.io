@@ -1,12 +1,14 @@
 # Live site: https://oyshibanglabistro.netlify.app
-# Connect repo: github.com/SAI141003/SAI141003.github.io
 
 [build]
-  publish = "."
+  command = "bash scripts/prepare-dist.sh"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
