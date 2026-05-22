@@ -53,7 +53,17 @@ python3 -m http.server 8080
 # then visit http://localhost:8080
 ```
 
-## Add new photos (owner)
+## Backend (recommended)
+
+Hook up free **Supabase** so you can upload photos and approve reviews without editing GitHub.
+
+**Setup guide:** [BACKEND_SETUP.md](BACKEND_SETUP.md)
+
+Paste keys in `js/config.js`. Until then, the site uses JSON files (below).
+
+---
+
+## Add new photos (owner, without backend)
 
 1. Open **Add Photos** in the menu → [manage-images.html](manage-images.html)
 2. Or: drop image files in `images/gallery/`, then run `node scripts/sync-gallery.js`

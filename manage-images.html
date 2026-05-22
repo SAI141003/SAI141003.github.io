@@ -12,12 +12,16 @@
     .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
     .admin-card { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: var(--shadow-sm); }
     .admin-card h3 { margin-top: 0; font-family: 'Playfair Display', serif; }
-    .admin-steps { margin: 0 0 1rem; padding-left: 1.25rem; color: var(--cocoa-soft); font-size: 0.95rem; }
-    .admin-steps li { margin-bottom: 0.5rem; }
-    .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
-    .preview-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
-    #galleryJson { width: 100%; min-height: 280px; font-family: ui-monospace, monospace; font-size: 0.8rem; padding: 0.75rem; border: 1px solid rgba(74,42,26,.15); border-radius: 8px; }
-    .admin-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .status-pill { display: inline-block; padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
+    .status-pill--on { background: #e8f5e9; color: #2e7d32; }
+    .status-pill--off { background: #fff3e0; color: #e65100; }
+    .owner-list { list-style: none; padding: 0; margin: 1rem 0 0; max-height: 320px; overflow-y: auto; }
+    .owner-list li { display: flex; gap: 0.75rem; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid rgba(74,42,26,.08); }
+    .owner-list img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
+    .owner-list .meta { flex: 1; font-size: 0.9rem; }
+    .owner-list button { font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: 6px; border: 1px solid #c62828; background: #fff; color: #c62828; cursor: pointer; }
+    .pending-review { background: var(--cream-soft); padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .pending-review button { margin-right: 0.35rem; margin-top: 0.35rem; }
     @media (max-width: 800px) { .admin-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -43,74 +47,84 @@
   <section class="page-intro">
     <div class="container">
       <span class="eyebrow">Site owner</span>
-      <h1>Add &amp; manage photos</h1>
-      <p>New photos in <code>data/gallery.json</code> show on the home page slideshow, menu scroll, gallery, and menu page automatically.</p>
+      <h1>Manage photos &amp; reviews</h1>
+      <p id="backendStatus">Checking backend…</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container admin-grid">
+    <div class="container">
 
-      <div class="admin-card">
-        <h3>How to add a new photo</h3>
-        <ol class="admin-steps">
-          <li>Save your image as PNG or JPG in the folder <code>images/gallery/</code> (use a simple name like <code>beef-rezala.png</code>).</li>
-          <li>Use the form on the right to add title, description, and price, then click <strong>Add to list</strong>.</li>
-          <li>Click <strong>Download gallery.json</strong> and replace <code>data/gallery.json</code> in your project.</li>
-          <li>Upload both the image file and <code>gallery.json</code> to GitHub, then push (same as updating the website).</li>
-        </ol>
-        <p style="font-size:0.9rem;color:var(--cocoa-soft)">
-          On a computer with Node installed you can instead run:
-          <code>node scripts/sync-gallery.js</code> after dropping files in <code>images/gallery/</code>.
-        </p>
-        <a class="btn btn--ghost" href="index.html">Back to site</a>
+      <div id="setupHelp" class="admin-card reveal" style="margin-bottom:2rem">
+        <h3>Backend not connected yet</h3>
+        <p>Follow <a href="BACKEND_SETUP.md">BACKEND_SETUP.md</a> to create a free Supabase project, then paste your keys into <code>js/config.js</code> and push to GitHub.</p>
+        <p style="font-size:0.9rem;color:var(--cocoa-soft)">Until then, use the JSON method in README (download gallery.json).</p>
       </div>
 
-      <div class="admin-card">
-        <h3>Add a photo entry</h3>
-        <div class="review-field">
-          <label for="imgFile">Image file name (in images/gallery/)</label>
-          <input type="text" id="imgFile" placeholder="my-new-dish.png" required>
+      <div id="ownerPanel" hidden>
+        <div class="admin-grid">
+          <div class="admin-card">
+            <h3>Owner login</h3>
+            <div id="loginForm">
+              <div class="review-field">
+                <label for="ownerEmail">Email</label>
+                <input type="email" id="ownerEmail" autocomplete="username">
+              </div>
+              <div class="review-field">
+                <label for="ownerPass">Password</label>
+                <input type="password" id="ownerPass" autocomplete="current-password">
+              </div>
+              <button type="button" class="btn btn--primary" id="btnLogin">Log in</button>
+            </div>
+            <div id="loggedInAs" hidden>
+              <p>Logged in as <strong id="ownerEmailShow"></strong></p>
+              <button type="button" class="btn btn--ghost" id="btnLogout">Log out</button>
+            </div>
+          </div>
+
+          <div class="admin-card" id="uploadCard" hidden>
+            <h3>Upload new photo</h3>
+            <div class="review-field">
+              <label for="upFile">Image file</label>
+              <input type="file" id="upFile" accept="image/*" required>
+            </div>
+            <div class="review-field">
+              <label for="upTitle">Title</label>
+              <input type="text" id="upTitle" placeholder="Beef Teheri">
+            </div>
+            <div class="review-field">
+              <label for="upAlt">Short label</label>
+              <input type="text" id="upAlt" placeholder="Beef teheri">
+            </div>
+            <div class="review-field">
+              <label for="upDesc">Description</label>
+              <input type="text" id="upDesc" placeholder="Beef and potato teheri.">
+            </div>
+            <div class="review-field">
+              <label for="upPrice">Price</label>
+              <input type="text" id="upPrice" placeholder="$12">
+            </div>
+            <div class="review-field">
+              <label><input type="checkbox" id="upBoard"> Menu board (flyer only)</label>
+            </div>
+            <button type="button" class="btn btn--primary" id="btnUpload">Upload</button>
+            <p id="uploadMsg" style="font-size:0.9rem;margin-top:0.75rem"></p>
+          </div>
         </div>
-        <div class="review-field">
-          <label for="imgAlt">Short label</label>
-          <input type="text" id="imgAlt" placeholder="Beef rezala">
+
+        <div class="admin-card reveal" style="margin-top:2rem" id="galleryListCard" hidden>
+          <h3>Photos on website</h3>
+          <p style="font-size:0.9rem;color:var(--cocoa-soft)">These show on home scroll, slideshow, gallery, and menu.</p>
+          <ul class="owner-list" id="ownerGalleryList"></ul>
         </div>
-        <div class="review-field">
-          <label for="imgTitle">Title on website</label>
-          <input type="text" id="imgTitle" placeholder="Beef Rezala">
+
+        <div class="admin-card reveal" style="margin-top:2rem" id="reviewsCard" hidden>
+          <h3>Pending reviews</h3>
+          <p style="font-size:0.9rem;color:var(--cocoa-soft)">Approve to show on the home page.</p>
+          <div id="pendingReviews"></div>
         </div>
-        <div class="review-field">
-          <label for="imgDesc">Description (optional)</label>
-          <input type="text" id="imgDesc" placeholder="15pc.">
-        </div>
-        <div class="review-field">
-          <label for="imgPrice">Price (optional)</label>
-          <input type="text" id="imgPrice" placeholder="$24">
-        </div>
-        <div class="review-field">
-          <label><input type="checkbox" id="imgBoard"> Menu board image (flyer only, not home scroll)</label>
-        </div>
-        <div class="admin-actions">
-          <button type="button" class="btn btn--primary" id="btnAdd">Add to list</button>
-          <button type="button" class="btn btn--ghost" id="btnDownload">Download gallery.json</button>
-        </div>
-        <input type="file" id="filePick" accept="image/*" multiple style="margin-top:1rem">
-        <p style="font-size:0.85rem;color:var(--cocoa-soft)">Pick photos to preview (you still upload files to GitHub manually).</p>
-        <div class="preview-grid" id="previewGrid"></div>
       </div>
 
-    </div>
-
-    <div class="container" style="margin-top:2rem">
-      <div class="admin-card">
-        <h3>Current gallery.json</h3>
-        <p style="font-size:0.9rem;color:var(--cocoa-soft)">Edit below or use the form above. Save this file as <code>data/gallery.json</code>.</p>
-        <textarea id="galleryJson" spellcheck="false"></textarea>
-        <div class="admin-actions">
-          <button type="button" class="btn btn--primary" id="btnSaveText">Apply edits from box</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -120,84 +134,155 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/backend.js"></script>
   <script src="js/main.js"></script>
   <script>
     (function () {
-      let data = { images: [] };
+      const statusEl = document.getElementById('backendStatus');
+      const setupHelp = document.getElementById('setupHelp');
+      const ownerPanel = document.getElementById('ownerPanel');
+      const loginForm = document.getElementById('loginForm');
+      const loggedInAs = document.getElementById('loggedInAs');
+      const uploadCard = document.getElementById('uploadCard');
+      const galleryListCard = document.getElementById('galleryListCard');
+      const reviewsCard = document.getElementById('reviewsCard');
 
-      const jsonEl = document.getElementById('galleryJson');
-      const preview = document.getElementById('previewGrid');
-
-      function renderJson() {
-        jsonEl.value = JSON.stringify(data, null, 2);
-      }
-
-      function renderPreview() {
-        preview.innerHTML = data.images
-          .map((i) => `<img src="${i.src}" alt="${i.alt || ''}" title="${i.title || ''}">`)
-          .join('');
-      }
-
-      async function load() {
-        try {
-          const res = await fetch('data/gallery.json');
-          data = await res.json();
-        } catch (e) {
-          data = { images: [] };
+      function setStatus(on) {
+        if (on) {
+          statusEl.innerHTML = '<span class="status-pill status-pill--on">Backend connected</span> Upload photos and approve reviews here.';
+          setupHelp.hidden = true;
+          ownerPanel.hidden = false;
+        } else {
+          statusEl.innerHTML = '<span class="status-pill status-pill--off">Backend off — using JSON files</span>';
+          setupHelp.hidden = false;
+          ownerPanel.hidden = true;
         }
-        renderJson();
-        renderPreview();
       }
 
-      document.getElementById('btnAdd').onclick = () => {
-        const file = document.getElementById('imgFile').value.trim();
-        if (!file) return alert('Enter the image file name.');
-        const entry = {
-          src: 'images/gallery/' + file.replace(/^.*\//, ''),
-          alt: document.getElementById('imgAlt').value.trim() || file,
-          title: document.getElementById('imgTitle').value.trim() || file,
-        };
-        const desc = document.getElementById('imgDesc').value.trim();
-        const price = document.getElementById('imgPrice').value.trim();
-        if (desc) entry.desc = desc;
-        if (price) entry.price = price;
-        if (document.getElementById('imgBoard').checked) entry.menuBoard = true;
-        data.images.push(entry);
-        renderJson();
-        renderPreview();
-        document.getElementById('imgFile').value = '';
-      };
+      async function refreshUI() {
+        const session = await window.OyshiBackend.getSession();
+        const loggedIn = Boolean(session);
+        loginForm.hidden = loggedIn;
+        loggedInAs.hidden = !loggedIn;
+        uploadCard.hidden = !loggedIn;
+        galleryListCard.hidden = !loggedIn;
+        reviewsCard.hidden = !loggedIn;
+        if (loggedIn) {
+          document.getElementById('ownerEmailShow').textContent = session.user.email;
+          await loadGalleryList();
+          await loadPendingReviews();
+        }
+      }
 
-      document.getElementById('btnDownload').onclick = () => {
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'gallery.json';
-        a.click();
-      };
-
-      document.getElementById('btnSaveText').onclick = () => {
+      async function loadGalleryList() {
+        const list = document.getElementById('ownerGalleryList');
         try {
-          data = JSON.parse(jsonEl.value);
-          renderPreview();
-          alert('Updated. Click Download gallery.json and upload to GitHub.');
+          const data = await window.OyshiBackend.fetchGallery();
+          list.innerHTML = (data.images || [])
+            .map(
+              (img) => `
+            <li>
+              <img src="${img.src}" alt="">
+              <div class="meta"><strong>${img.title || img.alt}</strong><br>${img.price || ''} ${img.menuBoard ? '· board' : ''}</div>
+              <button type="button" data-del="${img.id}">Delete</button>
+            </li>`
+            )
+            .join('');
+          list.querySelectorAll('[data-del]').forEach((btn) => {
+            btn.onclick = async () => {
+              if (!confirm('Delete this photo from the website?')) return;
+              await window.OyshiBackend.deleteGalleryImage(btn.dataset.del);
+              await loadGalleryList();
+            };
+          });
         } catch (e) {
-          alert('Invalid JSON. Check the format.');
+          list.innerHTML = '<li>Could not load. Run schema.sql in Supabase first.</li>';
+        }
+      }
+
+      async function loadPendingReviews() {
+        const box = document.getElementById('pendingReviews');
+        try {
+          const rows = await window.OyshiBackend.fetchAllReviews();
+          const pending = rows.filter((r) => !r.approved);
+          if (!pending.length) {
+            box.innerHTML = '<p style="color:var(--cocoa-soft)">No pending reviews.</p>';
+            return;
+          }
+          box.innerHTML = pending
+            .map(
+              (r) => `
+            <div class="pending-review">
+              <strong>${r.name}</strong> · ${r.rating}/5<br>
+              ${r.message}
+              <br>
+              <button type="button" class="btn btn--primary btn-sm" data-ok="${r.id}">Approve</button>
+              <button type="button" class="btn btn--ghost btn-sm" data-no="${r.id}">Delete</button>
+            </div>`
+            )
+            .join('');
+          box.querySelectorAll('[data-ok]').forEach((b) => {
+            b.onclick = async () => {
+              await window.OyshiBackend.setReviewApproved(b.dataset.ok, true);
+              await loadPendingReviews();
+            };
+          });
+          box.querySelectorAll('[data-no]').forEach((b) => {
+            b.onclick = async () => {
+              if (!confirm('Delete this review?')) return;
+              const sb = window.OyshiBackend.getClient();
+              await sb.from('reviews').delete().eq('id', b.dataset.no);
+              await loadPendingReviews();
+            };
+          });
+        } catch (e) {
+          box.innerHTML = '<p>Log in to manage reviews.</p>';
+        }
+      }
+
+      document.getElementById('btnLogin').onclick = async () => {
+        try {
+          await window.OyshiBackend.signIn(
+            document.getElementById('ownerEmail').value.trim(),
+            document.getElementById('ownerPass').value
+          );
+          await refreshUI();
+        } catch (e) {
+          alert(e.message || 'Login failed');
         }
       };
 
-      document.getElementById('filePick').onchange = (e) => {
-        [...e.target.files].forEach((f) => {
-          const name = f.name.toLowerCase().replace(/\s+/g, '-');
-          document.getElementById('imgFile').value = name;
-          document.getElementById('imgAlt').value = name.replace(/\.[^.]+$/, '').replace(/-/g, ' ');
-          const img = document.createElement('img');
-          img.src = URL.createObjectURL(f);
-          preview.appendChild(img);
-        });
+      document.getElementById('btnLogout').onclick = async () => {
+        await window.OyshiBackend.signOut();
+        await refreshUI();
       };
 
-      load();
+      document.getElementById('btnUpload').onclick = async () => {
+        const file = document.getElementById('upFile').files[0];
+        if (!file) return alert('Choose an image file.');
+        const msg = document.getElementById('uploadMsg');
+        msg.textContent = 'Uploading…';
+        try {
+          await window.OyshiBackend.uploadGalleryImage(file, {
+            title: document.getElementById('upTitle').value.trim(),
+            alt: document.getElementById('upAlt').value.trim(),
+            description: document.getElementById('upDesc').value.trim(),
+            price: document.getElementById('upPrice').value.trim(),
+            menuBoard: document.getElementById('upBoard').checked,
+          });
+          msg.textContent = 'Uploaded. It is live on the site now.';
+          document.getElementById('upFile').value = '';
+          await loadGalleryList();
+        } catch (e) {
+          msg.textContent = '';
+          alert(e.message || 'Upload failed');
+        }
+      };
+
+      setStatus(window.OyshiBackend?.isEnabled());
+      if (window.OyshiBackend?.isEnabled()) refreshUI();
     })();
   </script>
 </body>

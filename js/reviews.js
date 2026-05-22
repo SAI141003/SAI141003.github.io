@@ -1,10 +1,11 @@
-/* Reviews: load published reviews + submit form */
+/* Reviews: Supabase or JSON + FormSubmit fallback */
 (function () {
   'use strict';
 
   const listEl = document.getElementById('reviewsList');
   const form = document.getElementById('reviewForm');
   const thanksEl = document.getElementById('reviewThanks');
+  const formCard = document.getElementById('reviewFormCard');
   const starInput = document.getElementById('reviewRating');
   const starBtns = document.querySelectorAll('.star-rating button');
 
@@ -15,6 +16,12 @@
       s += i <= full ? '&#9733;' : '&#9734;';
     }
     return s;
+  }
+
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
   }
 
   function renderReviews(reviews) {
@@ -39,13 +46,17 @@
       .join('');
   }
 
-  function escapeHtml(str) {
-    const d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
-
   async function loadReviews() {
+    if (window.OyshiBackend?.isEnabled()) {
+      try {
+        const reviews = await window.OyshiBackend.fetchReviews();
+        renderReviews(reviews);
+        return;
+      } catch (err) {
+        console.warn('Supabase reviews:', err);
+      }
+    }
+
     try {
       const res = await fetch('data/reviews.json');
       if (!res.ok) throw new Error('not found');
@@ -56,7 +67,6 @@
     }
   }
 
-  // Star rating picker
   if (starBtns.length && starInput) {
     starBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -71,19 +81,42 @@
     });
   }
 
-  // Thank-you message after FormSubmit redirect
-  const formCard = document.getElementById('reviewFormCard');
-  if (new URLSearchParams(location.search).get('review') === 'thanks') {
+  function showThanks() {
     if (thanksEl) thanksEl.hidden = false;
     if (formCard) formCard.hidden = true;
+    if (location.hash !== '#reviews') location.hash = 'reviews';
+  }
+
+  if (new URLSearchParams(location.search).get('review') === 'thanks') {
+    showThanks();
     history.replaceState(null, '', location.pathname + '#reviews');
   }
 
   if (form && starInput) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       if (!starInput.value) {
         e.preventDefault();
         alert('Please choose a star rating.');
+        return;
+      }
+
+      if (window.OyshiBackend?.isEnabled()) {
+        e.preventDefault();
+        const fd = new FormData(form);
+        try {
+          await window.OyshiBackend.submitReview({
+            name: fd.get('name'),
+            rating: fd.get('rating'),
+            message: fd.get('message'),
+            email: fd.get('email') || '',
+          });
+          form.reset();
+          starBtns.forEach((b) => b.classList.remove('is-on'));
+          showThanks();
+        } catch (err) {
+          alert('Could not send review. Try again or call us.');
+          console.error(err);
+        }
       }
     });
   }
