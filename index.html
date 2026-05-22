@@ -165,7 +165,7 @@
               <input type="hidden" name="_subject" value="New review – Oyshi Bangla Bistro">
               <input type="hidden" name="_template" value="table">
               <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_next" value="https://sai141003.github.io/index.html?review=thanks#reviews">
+              <input type="hidden" name="_next" id="reviewFormNext" value="">
 
               <div class="review-honeypot" aria-hidden="true">
                 <label>Leave blank</label>
@@ -274,5 +274,11 @@
   <script src="js/main.js"></script>
   <script src="js/gallery-loader.js"></script>
   <script src="js/reviews.js"></script>
+  <script>
+    (function () {
+      var el = document.getElementById('reviewFormNext');
+      if (el) el.value = location.origin + '/index.html?review=thanks#reviews';
+    })();
+  </script>
 </body>
 </html>

@@ -120,9 +120,11 @@ The site updates in about 1–2 minutes after each push.
 
 Then commit and push. The `date` field is optional.
 
-## Custom domain (optional)
+## Custom domain (remove “github” from the link)
 
-In the repo on GitHub: **Settings → Pages → Custom domain**, then point your domain’s DNS to GitHub Pages (A/CNAME records per GitHub’s instructions).
+Free GitHub hosting **cannot** give you a link with zero “github” in it. To use only your business name (e.g. **https://oyshibanglabistro.ca**), buy a domain and follow **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
+
+Until then, the live site is **https://sai141003.github.io/** (no repo name in the path).
 
 ## Contact
 
