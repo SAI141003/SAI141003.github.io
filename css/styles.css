@@ -279,11 +279,26 @@ img { max-width: 100%; display: block; }
   gap: 3rem;
   align-items: center;
 }
-.about-grid img {
+.about-slideshow {
+  position: relative;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--cocoa);
+}
+.about-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.about-slideshow img.is-active {
+  opacity: 1;
+  z-index: 1;
 }
 
 /* ---------- Menu ---------- */

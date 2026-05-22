@@ -44,6 +44,20 @@
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
+  // ---------- About section image slideshow ----------
+  const aboutSlideshow = document.getElementById('aboutSlideshow');
+  if (aboutSlideshow) {
+    const slides = aboutSlideshow.querySelectorAll('img');
+    if (slides.length > 1) {
+      let index = 0;
+      setInterval(() => {
+        slides[index].classList.remove('is-active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('is-active');
+      }, 4000);
+    }
+  }
+
   // ---------- Home page menu horizontal scroll ----------
   const menuScroll = document.getElementById('menuScroll');
   const prevBtn = document.querySelector('.menu-scroll-prev');
