@@ -1,19 +1,12 @@
-# Your website links
+# How to find your website link
 
-## Cloudflare (main — no github)
+## Vercel (main)
 
-**https://oyshibanglabistro.saikoushik1410.workers.dev/**
+**https://oyshibanglabistro.vercel.app**
 
-| Page | Link |
-|------|------|
-| Home | https://oyshibanglabistro.saikoushik1410.workers.dev/ |
-| Menu | https://oyshibanglabistro.saikoushik1410.workers.dev/menu.html |
-| Gallery | https://oyshibanglabistro.saikoushik1410.workers.dev/gallery.html |
-| Contact | https://oyshibanglabistro.saikoushik1410.workers.dev/contact.html |
+**Find it:** [vercel.com/dashboard](https://vercel.com/dashboard) → your project → **Visit** or **Settings** → **Domains**.
 
-**Find in dashboard:** Workers & Pages → **oyshibanglabistro** → **Visit**
-
-If you only see “Hello world”, redeploy with settings in **[CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md)**.
+Full setup: **[VERCEL_SETUP.md](VERCEL_SETUP.md)**
 
 ---
 

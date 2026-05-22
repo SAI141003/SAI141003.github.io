@@ -78,16 +78,16 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 
 ## Live site (share this link — no “github” in the URL)
 
-**https://oyshibanglabistro.saikoushik1410.workers.dev/**
+**https://oyshibanglabistro.vercel.app**
 
 | Page | Link |
 |------|------|
-| Home | https://oyshibanglabistro.saikoushik1410.workers.dev/ |
-| Menu | https://oyshibanglabistro.saikoushik1410.workers.dev/menu.html |
-| Gallery | https://oyshibanglabistro.saikoushik1410.workers.dev/gallery.html |
-| Order & Contact | https://oyshibanglabistro.saikoushik1410.workers.dev/contact.html |
+| Home | https://oyshibanglabistro.vercel.app/ |
+| Menu | https://oyshibanglabistro.vercel.app/menu.html |
+| Gallery | https://oyshibanglabistro.vercel.app/gallery.html |
+| Order & Contact | https://oyshibanglabistro.vercel.app/contact.html |
 
-**First-time setup:** [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) (connect GitHub to Cloudflare Pages, ~10 min).
+**First-time setup:** [VERCEL_SETUP.md](VERCEL_SETUP.md) (connect GitHub to Vercel, ~5 min).
 
 ---
 
@@ -101,7 +101,7 @@ git commit -m "Describe your change"
 git push origin main
 ```
 
-Push to GitHub → Cloudflare rebuilds in ~2 min.
+Push to GitHub → Vercel rebuilds in ~2 min.
 
 ## Reviews
 

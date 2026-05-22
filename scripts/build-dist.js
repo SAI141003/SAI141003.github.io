@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Copy public site files into dist/ (Cloudflare Pages, GitHub Pages).
+ * Copy public site files into dist/ (Vercel, GitHub Pages).
  */
 const fs = require('fs');
 const path = require('path');

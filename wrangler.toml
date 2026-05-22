@@ -1,6 +1,0 @@
-name = "oyshibanglabistro"
-compatibility_date = "2024-01-01"
-
-# Serve the built static site from dist/
-[assets]
-directory = "./dist"
