@@ -53,11 +53,24 @@ python3 -m http.server 8080
 # then visit http://localhost:8080
 ```
 
+## Add new photos (owner)
+
+1. Open **Add Photos** in the menu → [manage-images.html](manage-images.html)
+2. Or: drop image files in `images/gallery/`, then run `node scripts/sync-gallery.js`
+3. Edit `data/gallery.json` if you need custom titles/prices
+4. Push to GitHub — the site updates everywhere automatically:
+   - Home page **About** slideshow (rotating)
+   - Home page **menu scroll** (sideways)
+   - **Gallery** page
+   - **Menu** page (boards + dish photos)
+
+Menu board images: set `"menuBoard": true` in `gallery.json` so they only show on menu boards, not the home scroll.
+
 ## Editing content
 
 - **Prices / menu items** — edit `menu.html` (one `<article class="menu-card">` per dish).
 - **Featured dishes on Home** — edit the `Customer Favourites` block inside `index.html`.
-- **Gallery photos** — drop new images into `images/gallery/` and reference them in `gallery.html`.
+- **Gallery photos** — use `manage-images.html` or edit `data/gallery.json` (see above).
 - **Contact details** — phone, email, address and Facebook link live inside `contact.html` (and the footer of every page).
 - **Theme colours** — change CSS variables at the top of `css/styles.css` (`--terracotta`, `--cream`, etc.).
 
