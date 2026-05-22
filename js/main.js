@@ -35,19 +35,58 @@
 
   // ---------- Scroll reveal ----------
   const revealEls = document.querySelectorAll('.reveal');
+
+  function revealInView() {
+    revealEls.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+        el.classList.add('is-visible');
+      }
+    });
+  }
+
+  function revealHashSection() {
+    const id = location.hash.replace('#', '');
+    if (!id) return;
+    const section = document.getElementById(id);
+    if (!section) return;
+    section.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+    revealInView();
+  }
+
   if ('IntersectionObserver' in window && revealEls.length) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
+      entries.forEach((e) => {
         if (e.isIntersecting) {
           e.target.classList.add('is-visible');
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach((el) => io.observe(el));
   } else {
-    revealEls.forEach(el => el.classList.add('is-visible'));
+    revealEls.forEach((el) => el.classList.add('is-visible'));
   }
+
+  function scrollToHash() {
+    const id = location.hash.replace('#', '');
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  revealHashSection();
+  scrollToHash();
+  window.addEventListener('hashchange', () => {
+    revealHashSection();
+    scrollToHash();
+  });
+  window.addEventListener('load', () => {
+    revealHashSection();
+    scrollToHash();
+    setTimeout(revealInView, 100);
+    setTimeout(revealInView, 500);
+  });
 
   // ---------- Lightbox (gallery + menu boards) ----------
   const gallery = document.querySelector('.gallery, .menu-boards--zoom');

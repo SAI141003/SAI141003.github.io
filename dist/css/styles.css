@@ -755,6 +755,12 @@ img { max-width: 100%; display: block; }
   margin: 0;
 }
 
+/* Anchor sections (Reviews link from other pages) */
+#reviews,
+#menu {
+  scroll-margin-top: 5.5rem;
+}
+
 /* ---------- Reviews ---------- */
 .reviews-layout {
   display: grid;

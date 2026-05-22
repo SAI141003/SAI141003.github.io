@@ -121,5 +121,12 @@
     });
   }
 
-  if (listEl) loadReviews();
+  if (listEl) {
+    loadReviews();
+    setTimeout(() => {
+      if (listEl.textContent.includes('Loading reviews')) {
+        renderReviews([]);
+      }
+    }, 4000);
+  }
 })();
