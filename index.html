@@ -6,6 +6,7 @@
   <title>Oyshi Bangla Bistro | Bangladeshi Home Cooking, Vancouver BC</title>
   <meta name="description" content="Oyshi Bangla Bistro in Vancouver, BC. Beef teheri, biryani, chicken kosha, vorta platters. Pickup, delivery, and catering.">
   <meta name="theme-color" content="#c96b3c" />
+  <link rel="canonical" href="https://oyshibanglabistro.netlify.app/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -277,7 +278,9 @@
   <script>
     (function () {
       var el = document.getElementById('reviewFormNext');
-      if (el) el.value = location.origin + '/index.html?review=thanks#reviews';
+      if (!el) return;
+      var base = (window.SITE_CONFIG && window.SITE_CONFIG.siteUrl) || location.origin;
+      el.value = base.replace(/\/$/, '') + '/index.html?review=thanks#reviews';
     })();
   </script>
 </body>

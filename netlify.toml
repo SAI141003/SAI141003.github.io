@@ -1,6 +1,5 @@
-# Netlify — free hosting, no "github" in the URL
-# After deploy, rename site to: oyshibanglabistro
-# Your link becomes: https://oyshibanglabistro.netlify.app
+# Live site: https://oyshibanglabistro.netlify.app
+# Connect repo: github.com/SAI141003/SAI141003.github.io
 
 [build]
   publish = "."
@@ -10,3 +9,4 @@
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

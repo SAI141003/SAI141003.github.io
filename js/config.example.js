@@ -3,6 +3,7 @@
  * Firebase Console → Project settings → Your apps → Web app
  */
 window.SITE_CONFIG = {
+  siteUrl: 'https://oyshibanglabistro.netlify.app',
   firebase: {
     apiKey: 'AIza...',
     authDomain: 'your-project.firebaseapp.com',

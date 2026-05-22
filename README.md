@@ -84,31 +84,33 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 - **Contact details** — phone, email, address and Facebook link live inside `contact.html` (and the footer of every page).
 - **Theme colours** — change CSS variables at the top of `css/styles.css` (`--terracotta`, `--cream`, etc.).
 
-## Live site
+## Live site (share this link)
 
-| Link | Notes |
-|------|--------|
-| **https://sai141003.github.io/** | Free on GitHub (has “github” in URL) |
-| **https://oyshibanglabistro.netlify.app** | Free on Netlify — **no GitHub in URL** (set up once, see below) |
+**https://oyshibanglabistro.netlify.app**
 
-### Free hosting without “github” in the link (no domain needed)
+| Page | Link |
+|------|------|
+| Home | https://oyshibanglabistro.netlify.app/ |
+| Menu | https://oyshibanglabistro.netlify.app/menu.html |
+| Gallery | https://oyshibanglabistro.netlify.app/gallery.html |
+| Order & Contact | https://oyshibanglabistro.netlify.app/contact.html |
+| Add Photos (owner) | https://oyshibanglabistro.netlify.app/manage-images.html |
 
-Follow **[FREE_HOSTING.md](FREE_HOSTING.md)** — 3-minute Netlify setup → link like `https://oyshibanglabistro.netlify.app`.
-
-You cannot get a **100% clean** link (only `oyshibanglabistro`) for free; every free host adds a short suffix (`netlify.app`, `web.app`, etc.). Buying a `.ca` domain is the only way to remove that completely.
+Backup (GitHub): https://sai141003.github.io/
 
 ---
 
-Hosted on GitHub Pages from the `SAI141003.github.io` repo. After you edit files locally, deploy with:
+Hosted on **Netlify** (auto-deploy from GitHub). After you edit files locally:
 
 ```bash
 cd ~/oyshis-bangla-bistro
 git add .
 git commit -m "Describe your change"
-git push
+git push origin main
+git push pages main
 ```
 
-The site updates in about 1–2 minutes after each push.
+Netlify rebuilds in about 1–2 minutes. See **[FREE_HOSTING.md](FREE_HOSTING.md)** if you need to reconnect Netlify.
 
 ## Reviews
 
@@ -133,7 +135,7 @@ Then commit and push. The `date` field is optional.
 
 Free GitHub hosting **cannot** give you a link with zero “github” in it. To use only your business name (e.g. **https://oyshibanglabistro.ca**), buy a domain and follow **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
 
-Until then, the live site is **https://sai141003.github.io/** (no repo name in the path).
+You can point a custom domain to Netlify later — see **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
 
 ## Contact
 
