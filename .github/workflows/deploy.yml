@@ -27,8 +27,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build site (Node — no bash)
-        run: npm run build
+      - name: Build site
+        run: node scripts/build-dist.js
 
       - uses: actions/configure-pages@v5
 
