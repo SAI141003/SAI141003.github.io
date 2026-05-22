@@ -12,12 +12,16 @@ In **Workers & Pages** → your project → **Settings** → **Build**:
 |---------|--------|
 | **Framework preset** | `None` |
 | **Build command** | `npm run build` |
-| **Deploy command** | **(leave EMPTY — delete `npx wrangler deploy` if it is there)** |
+| **Deploy command** | **Completely blank** — delete all text (do **not** type the word `empty`) |
 | **Build output directory** | `dist` |
 | **Root directory** | `/` (leave empty / default) |
 | **Node.js version** | `20` |
 
-**Important:** Do **not** use `npx wrangler deploy`. That is for Workers, not static Pages. Cloudflare publishes `dist/` automatically when deploy command is empty.
+**Important:** Do **not** use `npx wrangler deploy`. Do **not** type the word `empty` in the box — that makes Cloudflare run a command called `empty` and fail.
+
+If Cloudflare will not let you save a blank deploy command, use: `:` (colon only — does nothing, succeeds).
+
+Cloudflare publishes `dist/` automatically after the build when deploy command is blank or `:`.
 
 Click **Save** → **Retry deployment**.
 
@@ -56,7 +60,8 @@ Live URL: **https://oyshibanglabistro.pages.dev**
 | `dist` not found | Set **Build output directory** to `dist` (not `/` or blank) |
 | Wrong framework (Next, Jekyll, etc.) | Set **Framework preset** to **None** |
 | Build succeeds but 404 | Output must be `dist`, not project root |
-| `wrangler deploy` / Missing entry-point | **Clear Deploy command** (must be empty) |
+| `wrangler deploy` / Missing entry-point | **Clear Deploy command** (must be blank, not the word `empty`) |
+| `/bin/sh: 1: empty: not found` | You typed `empty` in Deploy command — **delete it** or use `:` only |
 
 ---
 
