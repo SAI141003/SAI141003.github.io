@@ -1,6 +1,6 @@
 /* Firebase web config — oyshibanglabistro */
 window.SITE_CONFIG = {
-  siteUrl: 'https://oyshibanglabistro.netlify.app',
+  siteUrl: 'https://sai141003.github.io',
   firebase: {
     apiKey: 'AIzaSyD6BI3q_Iq_IfBnmBL1nrds4SM87ECo6fU',
     authDomain: 'oyshi-bangla-bistro.firebaseapp.com',

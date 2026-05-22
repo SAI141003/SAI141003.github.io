@@ -3,7 +3,7 @@
  * Project settings → Your apps → Web app → firebaseConfig
  */
 window.SITE_CONFIG = {
-  siteUrl: 'https://oyshibanglabistro.netlify.app',
+  siteUrl: 'https://sai141003.github.io',
   firebase: {
     apiKey: 'PASTE_FROM_FIREBASE_CONSOLE',
     authDomain: 'oyshi-bangla-bistro.firebaseapp.com',

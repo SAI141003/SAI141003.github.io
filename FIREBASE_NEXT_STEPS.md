@@ -17,7 +17,7 @@ You still need **apiKey** and **appId** from a **Web app** (not shown on the pro
 
 ```javascript
 window.SITE_CONFIG = {
-  siteUrl: 'https://oyshibanglabistro.netlify.app',
+  siteUrl: 'https://sai141003.github.io',
   firebase: {
     apiKey: 'PASTE_HERE',
     authDomain: 'PASTE_HERE',
@@ -57,8 +57,16 @@ window.SITE_CONFIG = {
 
 ---
 
+## Step 5 — Authorized domain (GitHub Pages)
+
+**Authentication** → **Settings** → **Authorized domains** → **Add domain:**
+
+`sai141003.github.io`
+
+---
+
 ## Done?
 
-Open **Add Photos** on your site. You should see **Connected to Firebase** → log in → upload a test photo.
+Open **Add Photos** at https://sai141003.github.io/manage-images.html You should see **Connected to Firebase** → log in → upload a test photo.
 
 **Need help?** Paste your Step 1 config here (apiKey, projectId, etc.) and say “config pasted” — the rest can be wired up for you.

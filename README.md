@@ -89,21 +89,21 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 
 ## Live site (share this link)
 
-**https://oyshibanglabistro.netlify.app**
+**https://sai141003.github.io/**
 
 | Page | Link |
 |------|------|
-| Home | https://oyshibanglabistro.netlify.app/ |
-| Menu | https://oyshibanglabistro.netlify.app/menu.html |
-| Gallery | https://oyshibanglabistro.netlify.app/gallery.html |
-| Order & Contact | https://oyshibanglabistro.netlify.app/contact.html |
-| Add Photos (owner) | https://oyshibanglabistro.netlify.app/manage-images.html |
+| Home | https://sai141003.github.io/ |
+| Menu | https://sai141003.github.io/menu.html |
+| Gallery | https://sai141003.github.io/gallery.html |
+| Order & Contact | https://sai141003.github.io/contact.html |
+| Add Photos (owner) | https://sai141003.github.io/manage-images.html |
 
-Backup (GitHub): https://sai141003.github.io/
+Netlify (`oyshibanglabistro.netlify.app`) is **paused** (free plan limit). See **[HOSTING.md](HOSTING.md)**.
 
 ---
 
-Hosted on **Netlify** (auto-deploy from GitHub). After you edit files locally:
+Hosted on **GitHub Pages** (auto-deploy from GitHub). After you edit files locally:
 
 ```bash
 cd ~/oyshis-bangla-bistro
@@ -113,7 +113,7 @@ git commit -m "Describe your change"
 git push origin main
 ```
 
-Netlify rebuilds in about 1–2 minutes. Connect Netlify to **`SAI141003.github.io`** only — see **[NETLIFY_FIX.md](NETLIFY_FIX.md)**.
+GitHub Actions rebuilds in about 1–2 minutes.
 
 ## Reviews
 

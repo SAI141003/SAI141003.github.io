@@ -1,49 +1,27 @@
-# Live site — Netlify
+# Live site — GitHub Pages (free)
 
-**https://oyshibanglabistro.netlify.app**
+**https://sai141003.github.io/**
 
-This is the main public link (no “github” in the URL).
+| Page | URL |
+|------|-----|
+| Home | https://sai141003.github.io/ |
+| Menu | https://sai141003.github.io/menu.html |
+| Gallery | https://sai141003.github.io/gallery.html |
+| Contact | https://sai141003.github.io/contact.html |
+| Add Photos | https://sai141003.github.io/manage-images.html |
 
----
-
-## Update the website
-
-1. Edit files in `~/oyshis-bangla-bistro`
-2. Push to GitHub:
+## Update the site
 
 ```bash
 cd ~/oyshis-bangla-bistro
-git add .
+npm run build
+git add -A
 git commit -m "Your change"
-git push origin main
 git push origin main
 ```
 
-3. Netlify rebuilds automatically (1–2 minutes)
+GitHub deploys automatically (~1–2 min).
 
----
+## Netlify (paused)
 
-## Reconnect Netlify (if deploy stopped)
-
-1. Log in at [app.netlify.com](https://app.netlify.com)
-2. Your site should be named **oyshibanglabistro**
-3. **Site configuration** → **Build & deploy** → **Link repository** → `SAI141003/SAI141003.github.io`
-4. Build command: *(leave empty)* · Publish directory: `.`
-
-Or one-click deploy:  
-https://app.netlify.com/start/deploy?repository=https://github.com/SAI141003/SAI141003.github.io
-
----
-
-## Backup: GitHub Pages
-
-https://sai141003.github.io/
-
-Still updates when you push, but share the **Netlify** link with customers.
-
----
-
-## Custom domain later (.ca / .com)
-
-In Netlify: **Domain management** → **Add domain** → follow DNS steps.  
-See **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
+`https://oyshibanglabistro.netlify.app` hit Netlify’s free usage limit and is paused. Use GitHub Pages above, or upgrade Netlify to unpause. See **[HOSTING.md](HOSTING.md)**.
