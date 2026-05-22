@@ -11,11 +11,13 @@ In **Workers & Pages** → your project → **Settings** → **Build**:
 | Setting | Value |
 |---------|--------|
 | **Framework preset** | `None` |
-| **Build command** | `npm run build` |
-| **Deploy command** | **Completely blank** — delete all text (do **not** type the word `empty`) |
+| **Build command** | `npm run build` ← **only here** |
+| **Deploy command** | **blank** (or `:` if blank not allowed) — **NOT** `npm run build` |
 | **Build output directory** | `dist` |
 | **Root directory** | `/` (leave empty / default) |
 | **Node.js version** | `20` |
+
+`npm run build` must **not** go in Deploy command. Build runs once; Cloudflare then uploads `dist/` automatically.
 
 **Important:** Do **not** use `npx wrangler deploy`. Do **not** type the word `empty` in the box — that makes Cloudflare run a command called `empty` and fail.
 
