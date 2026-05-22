@@ -61,13 +61,24 @@ python3 -m http.server 8080
 - **Contact details** — phone, email, address and Facebook link live inside `contact.html` (and the footer of every page).
 - **Theme colours** — change CSS variables at the top of `css/styles.css` (`--terracotta`, `--cream`, etc.).
 
-## Deploy
+## Live site
 
-This site is fully static, so you can host it for free on any of:
+**https://sai141003.github.io/oyshis-bangla-bistro/**
 
-- **GitHub Pages** — push to a repo and enable Pages on the `main` branch.
-- **Netlify / Vercel** — drag-and-drop the folder.
-- **Cloudflare Pages** — connect the repo or upload directly.
+Hosted on GitHub Pages from the `main` branch. After you edit files locally, deploy with:
+
+```bash
+cd ~/oyshis-bangla-bistro
+git add .
+git commit -m "Describe your change"
+git push
+```
+
+The site updates in about 1–2 minutes after each push.
+
+## Custom domain (optional)
+
+In the repo on GitHub: **Settings → Pages → Custom domain**, then point your domain’s DNS to GitHub Pages (A/CNAME records per GitHub’s instructions).
 
 ## Contact
 
