@@ -1,72 +1,50 @@
-# Live link without “github” in the URL
+# Your Cloudflare website link
 
-**https://oyshibanglabistro.pages.dev**
+**https://oyshibanglabistro.saikoushik1410.workers.dev/**
+
+(No `github` in the address.)
 
 ---
 
-## Cloudflare build settings (copy exactly)
+## Build settings (Workers + static site)
 
-In **Workers & Pages** → your project → **Settings** → **Build**:
+In **Workers & Pages** → **oyshibanglabistro** → **Settings** → **Build**:
 
 | Setting | Value |
 |---------|--------|
 | **Framework preset** | `None` |
-| **Build command** | `npm run build` ← **only here** |
-| **Deploy command** | **blank** (or `:` if blank not allowed) — **NOT** `npm run build` |
-| **Build output directory** | `dist` |
-| **Root directory** | `/` (leave empty / default) |
-| **Node.js version** | `20` |
+| **Build command** | `npm run build` |
+| **Deploy command** | `npx wrangler deploy` |
+| **Build output directory** | `dist` (if asked) |
 
-`npm run build` must **not** go in Deploy command. Build runs once; Cloudflare then uploads `dist/` automatically.
+The repo includes `wrangler.toml` so deploy uploads your real website from `dist/`, not “Hello world”.
 
-**Important:** Do **not** use `npx wrangler deploy`. Do **not** type the word `empty` in the box — that makes Cloudflare run a command called `empty` and fail.
-
-If Cloudflare will not let you save a blank deploy command, use: `:` (colon only — does nothing, succeeds).
-
-Cloudflare publishes `dist/` automatically after the build when deploy command is blank or `:`.
-
-Click **Save** → **Retry deployment**.
+**Save** → **Retry deployment**.
 
 ---
 
-## If build still fails — use “no build” (easiest)
+## After deploy succeeds
 
-The `dist/` folder is already in GitHub. You can skip the build step:
-
-| Setting | Value |
-|---------|--------|
-| **Framework preset** | `None` |
-| **Build command** | *(leave completely empty)* |
-| **Build output directory** | `dist` |
-
-Save and redeploy. Cloudflare will publish the files already in your repo.
+Open **https://oyshibanglabistro.saikoushik1410.workers.dev/** — you should see Oyshi Bangla Bistro (menu, gallery, etc.), not “Hello world”.
 
 ---
 
-## One-time: connect GitHub
+## Find your link in Cloudflare
 
-1. https://dash.cloudflare.com → **Workers & Pages** → **Create** → **Pages**
-2. **Connect to Git** → repo **SAI141003/SAI141003.github.io**
-3. **Project name:** `oyshibanglabistro`
-4. Use the table above → **Save and Deploy**
+1. https://dash.cloudflare.com
+2. **Workers & Pages** → click **oyshibanglabistro**
+3. Click **Visit** at the top
 
-Live URL: **https://oyshibanglabistro.pages.dev**
-
----
-
-## Common errors
-
-| Error | Fix |
-|-------|-----|
-| `npm ci` / lockfile error | Use settings above; latest repo includes `package-lock.json` |
-| `dist` not found | Set **Build output directory** to `dist` (not `/` or blank) |
-| Wrong framework (Next, Jekyll, etc.) | Set **Framework preset** to **None** |
-| Build succeeds but 404 | Output must be `dist`, not project root |
-| `wrangler deploy` / Missing entry-point | **Clear Deploy command** (must be blank, not the word `empty`) |
-| `/bin/sh: 1: empty: not found` | You typed `empty` in Deploy command — **delete it** or use `:` only |
+URL format: `https://PROJECT-NAME.YOUR-SUBDOMAIN.workers.dev`
 
 ---
 
-## Optional: your own `.ca` domain
+## Backup (GitHub)
 
-See **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.
+https://sai141003.github.io/ — still works if Cloudflare fails.
+
+---
+
+## Custom domain later
+
+Buy `oyshibanglabistro.ca` and add it under **Custom domains** in the same project. See **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)**.

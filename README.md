@@ -78,14 +78,14 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 
 ## Live site (share this link — no “github” in the URL)
 
-**https://oyshibanglabistro.pages.dev**
+**https://oyshibanglabistro.saikoushik1410.workers.dev/**
 
 | Page | Link |
 |------|------|
-| Home | https://oyshibanglabistro.pages.dev/ |
-| Menu | https://oyshibanglabistro.pages.dev/menu.html |
-| Gallery | https://oyshibanglabistro.pages.dev/gallery.html |
-| Order & Contact | https://oyshibanglabistro.pages.dev/contact.html |
+| Home | https://oyshibanglabistro.saikoushik1410.workers.dev/ |
+| Menu | https://oyshibanglabistro.saikoushik1410.workers.dev/menu.html |
+| Gallery | https://oyshibanglabistro.saikoushik1410.workers.dev/gallery.html |
+| Order & Contact | https://oyshibanglabistro.saikoushik1410.workers.dev/contact.html |
 
 **First-time setup:** [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) (connect GitHub to Cloudflare Pages, ~10 min).
 
