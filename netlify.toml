@@ -1,8 +1,12 @@
 # https://oyshibanglabistro.netlify.app
-# Publishes pre-built dist/ from the repo (no build step = no build failures)
+# Builds fresh dist/ on each deploy from GitHub
 
 [build]
+  command = "npm run build"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [[headers]]
   for = "/*"
