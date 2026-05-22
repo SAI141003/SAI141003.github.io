@@ -1,0 +1,21 @@
+{
+  "images": [
+    { "src": "images/gallery/01-beef-teheri.png", "alt": "Beef teheri", "title": "Beef Teheri", "desc": "Beef and potato teheri.", "price": "$12" },
+    { "src": "images/gallery/02-mixed-vaji-dal.png", "alt": "Mixed vaji and daal", "title": "Mixed Vaji & Daal", "desc": "2 shareable.", "price": "$12" },
+    { "src": "images/gallery/03-dim-bhuna.png", "alt": "Dim bhuna", "title": "Dim Bhuna", "desc": "Egg curry, 4pc.", "price": "$15" },
+    { "src": "images/gallery/04-chicken-kosha.png", "alt": "Chicken kosha", "title": "Chicken Kosha", "desc": "Drumsticks in onion masala.", "price": "$18" },
+    { "src": "images/gallery/05-beef-orosh.png", "alt": "Beef orosh biryani", "title": "Beef Orosh Biryani", "desc": "Beef biryani with potatoes.", "price": "$12" },
+    { "src": "images/gallery/06-rupchada-masallam.png", "alt": "Rupchada masallam", "title": "Rupchada Masallam", "desc": "4pc.", "price": "$10" },
+    { "src": "images/gallery/07-vorta-platter.png", "alt": "Vorta platter", "title": "Vorta Platter", "desc": "Mixed vorta.", "price": "$15" },
+    { "src": "images/gallery/08-chicken-korma.png", "alt": "Chicken korma", "title": "Chicken Korma", "desc": "5 drumsticks.", "price": "$20" },
+    { "src": "images/gallery/09-vorta-spread.png", "alt": "Vorta spread", "title": "Nasta Platter", "desc": "For sharing.", "price": "$40" },
+    { "src": "images/gallery/10-bhuna-trio.png", "alt": "Beef bhuna dishes", "title": "Beef Kalabhuna", "desc": "15pc.", "price": "$24" },
+    { "src": "images/gallery/11-chicken-platter.png", "alt": "Chicken platter", "title": "Doi Chicken", "desc": "6 medium pc.", "price": "$18" },
+    { "src": "images/gallery/12-full-spread.png", "alt": "Full spread of dishes", "title": "Biye Bari Platter", "desc": "Rice, meat curry, and sides.", "price": "$18" },
+    { "src": "images/gallery/menu-classic.png", "alt": "Classic menu board", "title": "Classic menu", "menuBoard": true },
+    { "src": "images/gallery/menu-mains.png", "alt": "Main dishes menu board", "title": "Main dishes", "menuBoard": true },
+    { "src": "images/gallery/menu-newly-launched.png", "alt": "New items menu board", "title": "New items", "menuBoard": true },
+    { "src": "images/gallery/menu-nasta.png", "alt": "Nasta menu board", "title": "Nasta", "menuBoard": true },
+    { "src": "images/gallery/menu-weekly.png", "alt": "Weekly menu board", "title": "Weekly menu", "menuBoard": true }
+  ]
+}

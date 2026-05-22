@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oyshi Bangla Bistro | Bangladeshi Home Cooking, Vancouver BC</title>
+  <meta name="description" content="Oyshi Bangla Bistro in Vancouver, BC. Beef teheri, biryani, chicken kosha, vorta platters. Pickup, delivery, and catering.">
+  <meta name="theme-color" content="#c96b3c" />
+  <link rel="canonical" href="https://oyshibanglabistro.netlify.app/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23c96b3c'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Georgia' font-size='52' fill='%23fdf6ee'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- ========== Header ========== -->
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">O</span>
+        <span>Oyshi Bangla Bistro</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="manage-images.html">Add Photos</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
+        <li><a href="contact.html">Order &amp; Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ========== Hero ========== -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="reveal">
+        <span class="eyebrow">Bangladeshi · Home-Cooked · Vancouver, BC</span>
+        <h1>Oyshi Bangla Bistro</h1>
+        <p class="lead">
+          Bangladeshi home cooking in Vancouver. Beef teheri, morog polao, biryani, vorta platters, and weekly specials.
+          Pickup, delivery, outdoor seating, or catering for your next event.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#menu">View the Menu</a>
+          <a class="btn btn--ghost" href="contact.html">Order Now</a>
+        </div>
+      </div>
+      <div class="hero__image reveal">
+        <img src="images/gallery/01-beef-teheri.png" alt="Beef teheri with potato and rice in a takeout box">
+        <div class="hero__badge">Cooked fresh daily</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Features ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="features">
+        <div class="feature reveal">
+          <div class="icon">&#9788;</div>
+          <h3>Home-Cooked</h3>
+          <p>Family recipes, cooked in small batches.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="icon">&#9991;</div>
+          <h3>Delivery &amp; Pickup</h3>
+          <p>Contactless delivery, takeout, or eat at our outdoor seating.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="icon">&#10070;</div>
+          <h3>Online Booking</h3>
+          <p>Reserve weekly platters or book catering in advance.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="icon">&#10084;</div>
+          <h3>Bangladeshi Food</h3>
+          <p>Rice, curry, fish, vorta, nasta, and sweets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== About ========== -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-slideshow reveal" id="aboutSlideshow" aria-label="Food photos slideshow"></div>
+        <div class="reveal">
+          <span class="eyebrow">About</span>
+          <h2>Home-style Bangladeshi food in Vancouver.</h2>
+          <p>
+            We cook the dishes we grew up with: teheri, polao, kosha, macher jhol, vorta,
+            and nasta. Everything is made to order in our kitchen on E 54th Avenue.
+          </p>
+          <p>
+            Order for yourself, your family, or a larger group. Weekly menus and catering
+            are available if you book ahead.
+          </p>
+          <a class="btn btn--primary" href="menu.html">View Menu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Menu scroll ========== -->
+  <section class="section" id="menu">
+    <div class="container">
+      <div class="menu-scroll-header reveal">
+        <div class="section-title">
+          <span class="eyebrow">Menu</span>
+          <h2>What we cook</h2>
+          <p>Scroll sideways to browse. Full list on the menu page.</p>
+        </div>
+        <div class="menu-scroll-nav" aria-hidden="false">
+          <button type="button" class="menu-scroll-prev" aria-label="Scroll menu left">&#8249;</button>
+          <button type="button" class="menu-scroll-next" aria-label="Scroll menu right">&#8250;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-scroll-outer reveal">
+      <div class="menu-scroll" id="menuScroll"></div>
+    </div>
+
+    <div class="container menu-scroll-footer reveal">
+      <p class="menu-scroll-hint">Swipe or use arrows to scroll</p>
+      <a class="btn btn--primary" href="menu.html">Full Menu</a>
+    </div>
+  </section>
+
+  <!-- ========== Reviews ========== -->
+  <section class="section section--alt" id="reviews">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="eyebrow">Reviews</span>
+        <h2>What customers say</h2>
+        <p>Read reviews below or leave your own.</p>
+      </div>
+
+      <div class="reviews-layout reveal">
+        <div class="reviews-list" id="reviewsList" aria-live="polite">
+          <p class="reviews-empty">Loading reviews…</p>
+        </div>
+
+        <div class="review-form-wrap">
+          <div class="review-thanks" id="reviewThanks" hidden>
+            <h3>Thank you</h3>
+            <p>We got your review. We may add it to this page after we read it.</p>
+          </div>
+
+          <div class="review-form-card" id="reviewFormCard">
+            <h3>Leave a review</h3>
+            <p class="form-note">Your review is sent to us by email. We post selected reviews here.</p>
+
+            <form
+              id="reviewForm"
+              action="https://formsubmit.co/oyshictg2000@gmail.com"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="New review – Oyshi Bangla Bistro">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" id="reviewFormNext" value="">
+
+              <div class="review-honeypot" aria-hidden="true">
+                <label>Leave blank</label>
+                <input type="text" name="_honey" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="review-field">
+                <label for="reviewName">Your name</label>
+                <input type="text" id="reviewName" name="name" required maxlength="80" autocomplete="name">
+              </div>
+
+              <div class="review-field">
+                <label>Rating</label>
+                <div class="star-rating" role="group" aria-label="Star rating">
+                  <button type="button" data-value="1" aria-label="1 star">&#9734;</button>
+                  <button type="button" data-value="2" aria-label="2 stars">&#9734;</button>
+                  <button type="button" data-value="3" aria-label="3 stars">&#9734;</button>
+                  <button type="button" data-value="4" aria-label="4 stars">&#9734;</button>
+                  <button type="button" data-value="5" aria-label="5 stars">&#9734;</button>
+                </div>
+                <input type="hidden" name="rating" id="reviewRating" value="" required>
+              </div>
+
+              <div class="review-field">
+                <label for="reviewText">Your review</label>
+                <textarea id="reviewText" name="message" required maxlength="1000" placeholder="What did you order? How was the food?"></textarea>
+              </div>
+
+              <div class="review-field">
+                <label for="reviewEmail">Email <span style="font-weight:400;color:var(--cocoa-soft)">(optional)</span></label>
+                <input type="email" id="reviewEmail" name="email" maxlength="120" autocomplete="email" placeholder="Only if you want us to reply">
+              </div>
+
+              <button type="submit" class="btn btn--primary">Submit review</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA strip ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-strip reveal">
+        <div>
+          <h2>Ordering for a group?</h2>
+          <p>Pre-order weekly platters or ask about catering for parties, dawats, and milad.</p>
+        </div>
+        <a class="btn btn--primary" href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color:#fff">
+            <span class="brand-mark">O</span>
+            <span style="color:#fff">Oyshi Bangla Bistro</span>
+          </div>
+          <p style="margin-top:1rem;color:rgba(253,246,238,.7);max-width:36ch">
+            Bangladeshi home cooking in Vancouver, BC.
+          </p>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <ul>
+            <li>1488 E 54th Avenue</li>
+            <li>Vancouver, BC V5P 1Y2</li>
+            <li>Canada</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+12362686198">236-268-6198</a></li>
+            <li><a href="mailto:oyshictg2000@gmail.com">oyshictg2000@gmail.com</a></li>
+            <li><a href="https://www.facebook.com/share/17ZcsncsjH/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="contact.html">Order &amp; Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="year"></span> Oyshi Bangla Bistro · Vancouver, BC
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/backend.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/gallery-loader.js"></script>
+  <script src="js/reviews.js"></script>
+  <script>
+    (function () {
+      var el = document.getElementById('reviewFormNext');
+      if (!el) return;
+      var base = (window.SITE_CONFIG && window.SITE_CONFIG.siteUrl) || location.origin;
+      el.value = base.replace(/\/$/, '') + '/index.html?review=thanks#reviews';
+    })();
+  </script>
+</body>
+</html>

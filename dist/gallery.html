@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | Oyshi Bangla Bistro, Vancouver BC</title>
+  <meta name="description" content="Photos of food from Oyshi Bangla Bistro: biryani, curries, vorta, and weekly specials.">
+  <link rel="canonical" href="https://oyshibanglabistro.netlify.app/gallery.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23c96b3c'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Georgia' font-size='52' fill='%23fdf6ee'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">O</span>
+        <span>Oyshi Bangla Bistro</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="manage-images.html">Add Photos</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
+        <li><a href="contact.html">Order &amp; Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="page-intro">
+    <div class="container">
+      <span class="eyebrow">Gallery</span>
+      <h1>Photos</h1>
+      <p>Recent orders and weekly specials. Click a photo to enlarge.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="gallery gallery--dynamic"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color:#fff">
+            <span class="brand-mark">O</span>
+            <span style="color:#fff">Oyshi Bangla Bistro</span>
+          </div>
+          <p style="margin-top:1rem;color:rgba(253,246,238,.7);max-width:36ch">
+            Bangladeshi home cooking in Vancouver, BC.
+          </p>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <ul>
+            <li>1488 E 54th Avenue</li>
+            <li>Vancouver, BC V5P 1Y2</li>
+            <li>Canada</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+12362686198">236-268-6198</a></li>
+            <li><a href="mailto:oyshictg2000@gmail.com">oyshictg2000@gmail.com</a></li>
+            <li><a href="https://www.facebook.com/share/17ZcsncsjH/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="contact.html">Order &amp; Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="year"></span> Oyshi Bangla Bistro · Vancouver, BC
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/backend.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/gallery-loader.js"></script>
+</body>
+</html>

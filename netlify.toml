@@ -1,11 +1,8 @@
-# Live site: https://oyshibanglabistro.netlify.app
+# https://oyshibanglabistro.netlify.app
+# Publishes pre-built dist/ from the repo (no build step = no build failures)
 
 [build]
-  command = "bash scripts/prepare-dist.sh"
   publish = "dist"
-
-[build.environment]
-  NODE_VERSION = "20"
 
 [[headers]]
   for = "/*"

@@ -1,45 +1,48 @@
-# Netlify — fix “build failed” / 404
+# Netlify — new approach (no build on Netlify)
 
-Your live link: **https://oyshibanglabistro.netlify.app**
+The website files are in the **`dist/`** folder inside the repo.  
+Netlify only **publishes** that folder — it does **not** run a build. That avoids “build failed” errors.
 
-## Netlify settings (must match exactly)
+## Netlify settings
 
-In [app.netlify.com](https://app.netlify.com) → site **oyshibanglabistro** → **Site configuration** → **Build & deploy**:
+[app.netlify.com](https://app.netlify.com) → **oyshibanglabistro** → **Build & deploy**:
 
 | Setting | Value |
 |---------|--------|
-| Repository | `SAI141003/SAI141003.github.io` (or `oyshis-bangla-bistro`) |
-| Branch | `main` |
-| Build command | `bash scripts/prepare-dist.sh` |
+| Build command | *(leave completely empty)* |
 | Publish directory | `dist` |
-| Base directory | *(leave empty)* |
+| Branch | `main` |
+| Repository | `SAI141003/SAI141003.github.io` |
 
-Click **Save** → **Deploys** → **Trigger deploy** → **Deploy site**.
-
-Build should finish in under 1 minute. Then open https://oyshibanglabistro.netlify.app/
-
----
-
-## If build still fails
-
-1. **Clear build cache**: Deploys → Trigger deploy → **Clear cache and deploy site**
-2. **Relink repo**: Build & deploy → Link repository → choose `SAI141003.github.io` → branch `main`
-3. Copy the **deploy log** error line and fix (often wrong publish folder — must be `dist`, not `.`)
+Save → **Trigger deploy** → **Deploy site**.
 
 ---
 
-## GitHub “build failed” emails
+## When you edit the website
 
-Those were from the **old** repo `oyshis-bangla-bistro` Pages (Jekyll). That is **turned off** now.
-
-- **GitHub backup site** (works): https://sai141003.github.io/
-- **Main site** (Netlify): https://oyshibanglabistro.netlify.app
-
-Push updates:
+1. Edit `index.html`, `menu.html`, `css/`, `js/`, etc.
+2. Run locally:
 
 ```bash
 cd ~/oyshis-bangla-bistro
+npm run build
+```
+
+3. Commit **both** your edits **and** the updated `dist/` folder:
+
+```bash
+git add .
+git commit -m "Update menu"
 git push pages main
 ```
 
-Netlify auto-deploys if the repo is linked.
+4. Netlify updates automatically (1–2 min).
+
+GitHub Actions also runs `npm run build` and updates https://sai141003.github.io/
+
+---
+
+## Live links
+
+- **Netlify:** https://oyshibanglabistro.netlify.app
+- **GitHub:** https://sai141003.github.io/

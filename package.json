@@ -1,0 +1,7 @@
+{
+  "name": "oyshi-bangla-bistro",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-dist.js"
+  }
+}
