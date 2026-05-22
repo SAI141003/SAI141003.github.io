@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "**/node_modules/**",
+      ".git/**",
+      "scripts/**",
+      "FIREBASE_SETUP.md",
+      "CUSTOM_DOMAIN.md",
+      "FREE_HOSTING.md",
+      "README.md"
+    ]
+  }
+}

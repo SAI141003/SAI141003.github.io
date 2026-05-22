@@ -86,11 +86,20 @@ Menu board images: set `"menuBoard": true` in `gallery.json` so they only show o
 
 ## Live site
 
-**https://sai141003.github.io/**
+| Link | Notes |
+|------|--------|
+| **https://sai141003.github.io/** | Free on GitHub (has “github” in URL) |
+| **https://oyshibanglabistro.netlify.app** | Free on Netlify — **no GitHub in URL** (set up once, see below) |
 
-*(Older link `…/oyshis-bangla-bistro/` still works until you turn off Pages on that repo.)*
+### Free hosting without “github” in the link (no domain needed)
 
-Hosted on GitHub Pages from the `main` branch. After you edit files locally, deploy with:
+Follow **[FREE_HOSTING.md](FREE_HOSTING.md)** — 3-minute Netlify setup → link like `https://oyshibanglabistro.netlify.app`.
+
+You cannot get a **100% clean** link (only `oyshibanglabistro`) for free; every free host adds a short suffix (`netlify.app`, `web.app`, etc.). Buying a `.ca` domain is the only way to remove that completely.
+
+---
+
+Hosted on GitHub Pages from the `SAI141003.github.io` repo. After you edit files locally, deploy with:
 
 ```bash
 cd ~/oyshis-bangla-bistro

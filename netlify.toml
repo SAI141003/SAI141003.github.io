@@ -1,0 +1,12 @@
+# Netlify — free hosting, no "github" in the URL
+# After deploy, rename site to: oyshibanglabistro
+# Your link becomes: https://oyshibanglabistro.netlify.app
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
